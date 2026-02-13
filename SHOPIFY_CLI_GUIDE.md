@@ -93,7 +93,7 @@ This command:
 - Watches for file changes and automatically syncs them
 - Hot reloads the browser when files change
 
-**Preview URL**: The command will display a URL like `https://your-store.myshopify.com?preview_theme_id=123456789`
+**Preview URL**: The command will display a URL like `https://your-store.myshopify.com/?preview_theme_id=123456789`
 
 **Press Ctrl+C** to stop the development server.
 
