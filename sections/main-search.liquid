@@ -1,0 +1,103 @@
+<div class="page-header">
+  <div class="container">
+    <h1>{{ 'general.search.title' | t }}</h1>
+  </div>
+</div>
+
+<section class="section">
+  <div class="container">
+    <div style="max-width: 600px; margin: 0 auto 4rem;">
+      <form action="{{ routes.search_url }}" method="get" role="search">
+        <div style="display: flex; gap: 1rem;">
+          <input 
+            type="search" 
+            name="q" 
+            value="{{ search.terms | escape }}"
+            placeholder="{{ 'general.search.placeholder' | t }}"
+            style="flex: 1;"
+          >
+          <button type="submit" class="button">
+            {{ 'general.search.submit' | t }}
+          </button>
+        </div>
+      </form>
+    </div>
+
+    {%- if search.performed -%}
+      <div style="margin-bottom: 3rem;">
+        <p style="font-size: 1.8rem;">
+          {%- if search.results_count == 0 -%}
+            No results found for "{{ search.terms }}"
+          {%- else -%}
+            {{ search.results_count }} result{% if search.results_count > 1 %}s{% endif %} for "{{ search.terms }}"
+          {%- endif -%}
+        </p>
+      </div>
+
+      {%- if search.results_count > 0 -%}
+        <div class="grid grid--3-col">
+          {%- for item in search.results -%}
+            {%- case item.object_type -%}
+              {%- when 'product' -%}
+                <div class="product-card">
+                  <div class="product-card__image-wrapper">
+                    <a href="{{ item.url }}">
+                      {%- if item.featured_image -%}
+                        <img 
+                          src="{{ item.featured_image | image_url: width: 600 }}"
+                          alt="{{ item.featured_image.alt | escape }}"
+                          class="product-card__image"
+                          loading="lazy"
+                        >
+                      {%- else -%}
+                        {{ 'product-1' | placeholder_svg_tag: 'product-card__image' }}
+                      {%- endif -%}
+                    </a>
+                  </div>
+
+                  <div class="product-card__content">
+                    <h3 class="product-card__title">
+                      <a href="{{ item.url }}">{{ item.title }}</a>
+                    </h3>
+
+                    <div class="product-card__price">
+                      {{ item.price | money }}
+                    </div>
+
+                    <a href="{{ item.url }}" class="button button--full">
+                      View Product
+                    </a>
+                  </div>
+                </div>
+
+              {%- when 'article' -%}
+                <div style="padding: 2rem; border: 1px solid #ddd;">
+                  <h3 style="font-size: 2rem; margin-bottom: 1rem;">
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                  </h3>
+                  <p>{{ item.content | strip_html | truncatewords: 20 }}</p>
+                  <a href="{{ item.url }}" style="margin-top: 1rem; display: inline-block;">Read more →</a>
+                </div>
+
+              {%- when 'page' -%}
+                <div style="padding: 2rem; border: 1px solid #ddd;">
+                  <h3 style="font-size: 2rem; margin-bottom: 1rem;">
+                    <a href="{{ item.url }}">{{ item.title }}</a>
+                  </h3>
+                  <p>{{ item.content | strip_html | truncatewords: 20 }}</p>
+                  <a href="{{ item.url }}" style="margin-top: 1rem; display: inline-block;">Read more →</a>
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Search",
+  "tag": "section"
+}
+{% endschema %}

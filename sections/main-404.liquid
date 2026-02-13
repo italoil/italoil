@@ -1,0 +1,21 @@
+<section class="section">
+  <div class="container">
+    <div style="text-align: center; padding: 6rem 2rem; max-width: 600px; margin: 0 auto;">
+      <h1 style="font-size: clamp(4rem, 8vw, 10rem); color: var(--color-primary);">404</h1>
+      <h2 style="margin: 2rem 0;">{{ 'general.404.title' | t }}</h2>
+      <p style="font-size: 1.8rem; margin-bottom: 3rem;">
+        {{ 'general.404.subtext' | t }}
+      </p>
+      <a href="{{ routes.root_url }}" class="button">
+        Return to Homepage
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404 Page",
+  "tag": "section"
+}
+{% endschema %}

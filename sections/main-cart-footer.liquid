@@ -1,0 +1,69 @@
+{%- if cart.item_count > 0 -%}
+  <section class="section" style="background-color: var(--color-secondary);">
+    <div class="container">
+      <div style="max-width: 600px; margin: 0 auto;">
+        <div style="background-color: white; padding: 3rem; margin-bottom: 2rem;">
+          {%- if cart.cart_level_discount_applications.size > 0 -%}
+            <div style="margin-bottom: 2rem;">
+              {%- for discount_application in cart.cart_level_discount_applications -%}
+                <div style="display: flex; justify-content: space-between; margin-bottom: 1rem; color: var(--color-accent);">
+                  <span>{{ discount_application.title }}</span>
+                  <span>-{{ discount_application.total_allocated_amount | money }}</span>
+                </div>
+              {%- endfor -%}
+            </div>
+          {%- endif -%}
+
+          <div style="display: flex; justify-content: space-between; font-size: 2rem; font-weight: 600; padding: 2rem 0; border-top: 2px solid var(--color-primary); border-bottom: 2px solid var(--color-primary);">
+            <span>{{ 'cart.general.subtotal' | t }}</span>
+            <span>{{ cart.total_price | money }}</span>
+          </div>
+
+          <p style="margin: 1.5rem 0; font-size: 1.4rem; color: #666;">
+            Shipping and taxes calculated at checkout
+          </p>
+
+          <button 
+            type="submit" 
+            name="checkout" 
+            class="button button--full"
+            style="margin-top: 2rem;"
+            form="cart-form"
+          >
+            {{ 'cart.general.checkout' | t }}
+          </button>
+        </div>
+
+        {%- if section.settings.cart_note_enable -%}
+          <div style="background-color: white; padding: 2rem;">
+            <label for="cart-note" style="font-weight: 600; margin-bottom: 1rem; display: block;">
+              {{ 'cart.general.note' | t }}
+            </label>
+            <textarea 
+              id="cart-note" 
+              name="note" 
+              form="cart-form"
+              rows="3"
+              style="width: 100%; padding: 1rem; border: 1px solid #ddd;"
+            >{{ cart.note }}</textarea>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </section>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Cart Footer",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "cart_note_enable",
+      "label": "Enable cart note",
+      "default": true
+    }
+  ]
+}
+{% endschema %}
