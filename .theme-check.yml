@@ -1,0 +1,63 @@
+# Theme Check Configuration for ITALOIL
+# https://shopify.dev/docs/themes/tools/theme-check
+
+# Enable all checks by default
+require: []
+
+# Ignore specific checks if needed
+ignore:
+  # No ignores by default - fix all issues
+
+# Paths to exclude from checking
+exclude:
+  - node_modules/**
+  - dist/**
+  - .git/**
+
+# Severity levels: error, warning, info
+# Override specific check severity if needed
+TemplateLength:
+  enabled: true
+  max_length: 500
+
+LiquidTag:
+  enabled: true
+
+UnusedAssign:
+  enabled: true
+
+DeprecatedFilter:
+  enabled: true
+
+MissingTemplate:
+  enabled: true
+
+ParserBlockingJavaScript:
+  enabled: true
+
+RemoteAsset:
+  enabled: true
+
+AssetUrlFilters:
+  enabled: true
+
+SyntaxError:
+  enabled: true
+
+ValidHTMLTranslation:
+  enabled: true
+
+MatchingTranslations:
+  enabled: true
+
+TranslationKeyExists:
+  enabled: true
+
+DefaultLocale:
+  enabled: true
+
+ValidJson:
+  enabled: true
+
+RequiredLayoutThemeObject:
+  enabled: true
