@@ -31,12 +31,31 @@ See [README_THEME.md](./README_THEME.md) for complete theme documentation.
 
 ## Quick Start
 
-1. Clone this repository
-2. Upload to Shopify as a theme
-3. Customize settings in Shopify admin
-4. Add products and configure pages
+### Option A: Using Shopify CLI (Recommended for Development)
 
-For detailed installation instructions, see the theme documentation.
+```bash
+# Install Shopify CLI
+npm install -g @shopify/cli @shopify/theme
+
+# Clone and navigate to repository
+git clone https://github.com/italoil/italoil.git
+cd italoil
+
+# Start development server
+shopify theme dev
+```
+
+See [SHOPIFY_CLI_GUIDE.md](./SHOPIFY_CLI_GUIDE.md) for complete Shopify CLI documentation.
+
+### Option B: Manual Upload
+
+1. Clone this repository
+2. Create ZIP file of theme files
+3. Upload to Shopify admin (Online Store → Themes)
+4. Customize settings in Shopify admin
+5. Add products and configure pages
+
+For detailed installation instructions, see [INSTALLATION.md](./INSTALLATION.md).
 
 ---
 

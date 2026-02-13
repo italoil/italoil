@@ -1,0 +1,43 @@
+{
+  "name": "italoil-shopify-theme",
+  "version": "1.0.0",
+  "description": "ITALOIL Shopify 2.0 Theme - Premium Italian Extra Virgin Olive Oil",
+  "private": true,
+  "scripts": {
+    "dev": "shopify theme dev",
+    "dev:open": "shopify theme dev --open",
+    "push": "shopify theme push",
+    "push:dev": "shopify theme push --development",
+    "push:live": "shopify theme push --live",
+    "push:unpublished": "shopify theme push --unpublished",
+    "pull": "shopify theme pull",
+    "check": "shopify theme check",
+    "list": "shopify theme list",
+    "share": "shopify theme share",
+    "package": "shopify theme package",
+    "login": "shopify auth login",
+    "logout": "shopify auth logout"
+  },
+  "keywords": [
+    "shopify",
+    "theme",
+    "olive-oil",
+    "italian",
+    "ecommerce",
+    "dop",
+    "organic"
+  ],
+  "author": "ITALOIL",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@shopify/cli": "^3.50.0",
+    "@shopify/theme": "^3.50.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/italoil/italoil.git"
+  }
+}

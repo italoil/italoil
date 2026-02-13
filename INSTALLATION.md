@@ -29,7 +29,9 @@ Complete step-by-step guide to installing and configuring the ITALOIL Shopify 2.
    - Once uploaded, click **Publish** to make it your live theme
    - OR click **Customize** to edit before publishing
 
-### Option B: Using Shopify CLI
+### Option B: Using Shopify CLI (Recommended for Development)
+
+For a better development experience with live reload and hot reloading:
 
 ```bash
 # Install Shopify CLI
@@ -38,12 +40,22 @@ npm install -g @shopify/cli @shopify/theme
 # Navigate to theme directory
 cd path/to/italoil-theme
 
-# Connect to your store
-shopify theme push
-
-# Or use development mode
+# Start development server (recommended)
 shopify theme dev
+
+# Or deploy to development theme
+shopify theme push --development
+
+# Or deploy to unpublished theme
+shopify theme push --unpublished
 ```
+
+**See [SHOPIFY_CLI_GUIDE.md](./SHOPIFY_CLI_GUIDE.md) for complete Shopify CLI documentation**, including:
+- Installation options
+- Development workflow
+- Deployment commands
+- Troubleshooting
+- Best practices
 
 ## Step 2: Theme Configuration
 

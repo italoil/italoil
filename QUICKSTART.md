@@ -14,9 +14,29 @@ This theme provides everything you need:
 - ✅ Email capture integration
 - ✅ SEO optimized
 
-## 🚀 5-Minute Setup
+## 🚀 Setup Options
 
-### 1. Package the Theme (1 min)
+### Option A: Shopify CLI (Fastest - Recommended for Developers)
+
+```bash
+# Install Shopify CLI
+npm install -g @shopify/cli @shopify/theme
+
+# Clone repository
+git clone https://github.com/italoil/italoil.git
+cd italoil
+
+# Start development server
+shopify theme dev
+```
+
+**That's it!** Preview URL opens automatically. Changes sync live.
+
+📚 **See [SHOPIFY_CLI_GUIDE.md](./SHOPIFY_CLI_GUIDE.md)** for complete CLI documentation.
+
+### Option B: Manual Upload (Traditional - 30 minutes)
+
+#### 1. Package the Theme (1 min)
 
 ```bash
 # From your terminal in the theme directory
@@ -27,7 +47,7 @@ Or manually:
 - Select all folders: `assets`, `config`, `layout`, `locales`, `sections`, `snippets`, `templates`
 - Create a ZIP file named `italoil-theme.zip`
 
-### 2. Upload to Shopify (2 min)
+#### 2. Upload to Shopify (2 min)
 
 1. Log in to your Shopify admin
 2. Go to: **Online Store → Themes**
@@ -36,7 +56,7 @@ Or manually:
 5. Wait for upload (usually 30-60 seconds)
 6. Click **Publish** or **Customize**
 
-### 3. Basic Configuration (2 min)
+#### 3. Basic Configuration (2 min)
 
 Click **Customize** button:
 

@@ -20,6 +20,7 @@ build/
 # Theme Kit / Shopify CLI
 config.yml
 .theme-check.yml
+.shopify/
 
 # Environment files
 .env
