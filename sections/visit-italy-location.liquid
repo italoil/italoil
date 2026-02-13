@@ -1,0 +1,79 @@
+<section class="section" style="background-color: var(--color-secondary);">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 4rem;">{{ section.settings.title | default: 'Getting to Lake Bolsena' }}</h2>
+    
+    <div class="grid grid--2-col" style="gap: 4rem; align-items: center;">
+      <div>
+        <h3 style="font-size: 2.4rem; margin-bottom: 2rem;">About the Region</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8; margin-bottom: 2rem;">
+          Lake Bolsena is located in the Lazio region of central Italy, about 100km northwest of Rome. This volcanic lake is the largest of its kind in Europe, surrounded by medieval villages and lush countryside.
+        </p>
+        <p style="font-size: 1.7rem; line-height: 1.8; margin-bottom: 2rem;">
+          The area has been cultivating olives since Etruscan times, with volcanic soil and mild climate creating ideal conditions for exceptional olive oil. Our groves are situated on hillsides with breathtaking lake views.
+        </p>
+
+        <div style="background-color: white; padding: 2rem; margin-top: 3rem;">
+          <h4 style="font-size: 2rem; margin-bottom: 1.5rem;">How to Get Here</h4>
+          <ul style="padding-left: 2rem;">
+            <li style="margin-bottom: 1rem;"><strong>From Rome:</strong> 1.5 hours by car via A1/E35</li>
+            <li style="margin-bottom: 1rem;"><strong>From Florence:</strong> 2.5 hours by car via A1</li>
+            <li style="margin-bottom: 1rem;"><strong>Nearest Train Station:</strong> Orvieto (30km)</li>
+            <li style="margin-bottom: 1rem;"><strong>Nearest Airport:</strong> Rome Fiumicino (120km)</li>
+          </ul>
+          <p style="margin-top: 1.5rem; font-size: 1.5rem; font-style: italic;">
+            We can arrange pickup from Orvieto station for groups.
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div style="background-color: #e0e0e0; aspect-ratio: 1; display: flex; align-items: center; justify-content: center; font-size: 1.8rem; color: #666; text-align: center; padding: 2rem;">
+          📍 Map of Lake Bolsena<br>
+          <small style="font-size: 1.4rem; display: block; margin-top: 1rem;">
+            Interactive map can be embedded here
+          </small>
+        </div>
+
+        <div style="margin-top: 2rem; background-color: white; padding: 2rem;">
+          <h4 style="font-size: 2rem; margin-bottom: 1rem;">Best Time to Visit</h4>
+          <p style="margin-bottom: 1rem;"><strong>🍂 October-November:</strong> Harvest season! See the complete process from tree to bottle.</p>
+          <p style="margin-bottom: 1rem;"><strong>🌸 April-June:</strong> Beautiful spring weather, olive trees in bloom.</p>
+          <p style="margin-bottom: 1rem;"><strong>☀️ July-September:</strong> Warm summer, perfect for lake activities and countryside exploration.</p>
+        </div>
+      </div>
+    </div>
+
+    <div style="background-color: white; padding: 3rem; margin-top: 4rem; text-align: center;">
+      <h3 style="margin-bottom: 2rem;">What to Expect</h3>
+      <div style="max-width: 800px; margin: 0 auto; text-align: left;">
+        <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          <strong>Language:</strong> We speak Italian and English. Our family is warm and welcoming to international visitors.
+        </p>
+        <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          <strong>Dress Code:</strong> Casual and comfortable. Wear closed-toe shoes for grove tours. Bring layers as temperatures can vary.
+        </p>
+        <p style="font-size: 1.6rem; line-height: 1.8; margin-bottom: 1.5rem;">
+          <strong>Accessibility:</strong> Some areas of the grove are on sloped terrain. Please let us know if you have mobility concerns and we'll accommodate.
+        </p>
+        <p style="font-size: 1.6rem; line-height: 1.8;">
+          <strong>Group Size:</strong> We welcome individuals, couples, and groups up to 20 people. Private tours available for larger groups.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Visit Italy Location",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Getting to Lake Bolsena"
+    }
+  ]
+}
+{% endschema %}

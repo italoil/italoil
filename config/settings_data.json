@@ -1,0 +1,12 @@
+{
+  "current": {
+    "color_primary": "#2C5530",
+    "color_secondary": "#F5F1E8",
+    "color_accent": "#C8A882",
+    "color_text": "#333333",
+    "color_background": "#FFFFFF",
+    "type_header_font": "playfair_display_n4",
+    "type_body_font": "lato_n4",
+    "enable_newsletter": true
+  }
+}

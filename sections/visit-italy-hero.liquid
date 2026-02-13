@@ -1,0 +1,43 @@
+<div class="hero section" style="min-height: 70vh; background: linear-gradient(rgba(44, 85, 48, 0.7), rgba(44, 85, 48, 0.7)), url('https://cdn.shopify.com/s/files/1/placeholder.jpg') center/cover;">
+  <div class="container">
+    <div class="hero__content fade-in" style="max-width: 800px; margin: 0 auto;">
+      <h1 class="hero__title" style="color: var(--color-secondary);">
+        {{ section.settings.title | default: 'Visit Lake Bolsena' }}
+      </h1>
+      <p class="hero__subtitle" style="color: var(--color-secondary); font-size: clamp(2rem, 3vw, 2.8rem);">
+        {{ section.settings.subtitle | default: 'Experience the heart of Italian olive oil culture. Visit our family groves and witness traditional production firsthand.' }}
+      </p>
+      <div class="hero__buttons" style="margin-top: 3rem;">
+        <a href="#contact" class="button" style="background-color: var(--color-accent); border-color: var(--color-accent); color: var(--color-primary);">
+          Plan Your Visit
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Visit Italy Hero",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Visit Lake Bolsena"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Experience the heart of Italian olive oil culture. Visit our family groves and witness traditional production firsthand."
+    },
+    {
+      "type": "image_picker",
+      "id": "background_image",
+      "label": "Background Image"
+    }
+  ]
+}
+{% endschema %}

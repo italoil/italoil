@@ -1,0 +1,105 @@
+<section class="section">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 2rem;">{{ section.settings.title | default: 'The ITALOIL Experience' }}</h2>
+    <p style="text-align: center; font-size: 1.8rem; max-width: 800px; margin: 0 auto 5rem;">
+      {{ section.settings.description | default: 'Immerse yourself in centuries of Italian tradition. Our family welcomes you to Lake Bolsena for an unforgettable agritourism experience.' }}
+    </p>
+
+    <div class="grid grid--2-col" style="gap: 4rem; margin-bottom: 5rem;">
+      <div>
+        <div style="background-color: var(--color-secondary); aspect-ratio: 4/3; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; font-size: 8rem;">
+          🫒
+        </div>
+        <h3 style="font-size: 2.4rem; margin-bottom: 1.5rem;">Grove Tours</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8;">
+          Walk through our organic olive groves overlooking Lake Bolsena. Learn about our sustainable cultivation methods passed down through generations. See firsthand how we maintain soil health and biodiversity without chemicals or pesticides.
+        </p>
+      </div>
+
+      <div>
+        <div style="background-color: var(--color-secondary); aspect-ratio: 4/3; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; font-size: 8rem;">
+          ⚙️
+        </div>
+        <h3 style="font-size: 2.4rem; margin-bottom: 1.5rem;">Oil Milling Process</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8;">
+          Witness the transformation from olive to oil in our traditional mill. During harvest season (October-November), see olives pressed within hours of picking. Learn about cold-pressing techniques that preserve flavor and nutrition.
+        </p>
+      </div>
+
+      <div>
+        <div style="background-color: var(--color-secondary); aspect-ratio: 4/3; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; font-size: 8rem;">
+          🍷
+        </div>
+        <h3 style="font-size: 2.4rem; margin-bottom: 1.5rem;">Oil Tasting</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8;">
+          Discover the complex flavors of genuine extra virgin olive oil. Learn professional tasting techniques and understand what makes DOP certified oil special. Taste different harvest years and varieties side by side.
+        </p>
+      </div>
+
+      <div>
+        <div style="background-color: var(--color-secondary); aspect-ratio: 4/3; margin-bottom: 2rem; display: flex; align-items: center; justify-content: center; font-size: 8rem;">
+          🍝
+        </div>
+        <h3 style="font-size: 2.4rem; margin-bottom: 1.5rem;">Traditional Meals</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8;">
+          Enjoy authentic Italian cuisine prepared by our family. Every dish showcases our olive oil, from bruschetta to fresh pasta. Experience how premium oil elevates simple, traditional recipes.
+        </p>
+      </div>
+    </div>
+
+    <div style="background-color: var(--color-primary); color: var(--color-secondary); padding: 4rem; text-align: center;">
+      <h3 style="color: var(--color-secondary); font-size: 2.8rem; margin-bottom: 2rem;">Visit Options</h3>
+      <div class="grid grid--2-col" style="gap: 3rem; max-width: 900px; margin: 0 auto;">
+        <div style="text-align: left; padding: 2rem; background-color: rgba(245, 241, 232, 0.1);">
+          <h4 style="color: var(--color-accent); font-size: 2.2rem; margin-bottom: 1rem;">Half-Day Visit</h4>
+          <p style="margin-bottom: 1.5rem;">Perfect for travelers passing through the region</p>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.8rem;">✓ Grove tour (1 hour)</li>
+            <li style="margin-bottom: 0.8rem;">✓ Mill demonstration</li>
+            <li style="margin-bottom: 0.8rem;">✓ Oil tasting session</li>
+            <li style="margin-bottom: 0.8rem;">✓ Light refreshments</li>
+          </ul>
+          <p style="margin-top: 1.5rem; font-size: 2rem; font-weight: 600; color: var(--color-accent);">€45 per person</p>
+        </div>
+
+        <div style="text-align: left; padding: 2rem; background-color: rgba(245, 241, 232, 0.1);">
+          <h4 style="color: var(--color-accent); font-size: 2.2rem; margin-bottom: 1rem;">Full-Day Experience</h4>
+          <p style="margin-bottom: 1.5rem;">Immerse yourself in Italian olive oil culture</p>
+          <ul style="list-style: none; padding: 0;">
+            <li style="margin-bottom: 0.8rem;">✓ Extended grove tour</li>
+            <li style="margin-bottom: 0.8rem;">✓ Hands-on harvesting (in season)</li>
+            <li style="margin-bottom: 0.8rem;">✓ Complete milling process</li>
+            <li style="margin-bottom: 0.8rem;">✓ Professional tasting course</li>
+            <li style="margin-bottom: 0.8rem;">✓ Traditional family lunch</li>
+            <li style="margin-bottom: 0.8rem;">✓ Take-home bottle (500ml)</li>
+          </ul>
+          <p style="margin-top: 1.5rem; font-size: 2rem; font-weight: 600; color: var(--color-accent);">€120 per person</p>
+        </div>
+      </div>
+      <p style="margin-top: 3rem; font-size: 1.6rem;">
+        Private group tours available. Contact us for custom experiences.
+      </p>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Visit Italy Experience",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "The ITALOIL Experience"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Immerse yourself in centuries of Italian tradition. Our family welcomes you to Lake Bolsena for an unforgettable agritourism experience."
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,65 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_text": "Skip to content",
+      "refresh_page": "Choosing a selection results in a full page refresh."
+    },
+    "meta": {
+      "tags": "Tagged \"{{ tags }}\"",
+      "page": "Page {{ page }}"
+    },
+    "404": {
+      "title": "404 Page Not Found",
+      "subtext": "The page you requested does not exist."
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "search": {
+      "title": "Search",
+      "placeholder": "Search our store",
+      "submit": "Search"
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to Cart",
+      "sold_out": "Sold Out",
+      "unavailable": "Unavailable",
+      "quantity": "Quantity",
+      "price": "Price",
+      "vendor": "Vendor",
+      "sku": "SKU"
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Your Cart",
+      "remove": "Remove",
+      "subtotal": "Subtotal",
+      "checkout": "Checkout",
+      "empty": "Your cart is empty",
+      "continue_shopping": "Continue Shopping",
+      "update": "Update Cart",
+      "note": "Order special instructions"
+    }
+  },
+  "sections": {
+    "cart": {
+      "cart_error": "There was an error updating your cart. Please try again.",
+      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart."
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "My Account"
+    },
+    "login": {
+      "title": "Login",
+      "email": "Email",
+      "password": "Password",
+      "sign_in": "Sign In"
+    }
+  }
+}

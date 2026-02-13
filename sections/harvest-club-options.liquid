@@ -1,0 +1,149 @@
+<section class="section" style="background-color: var(--color-secondary);">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 4rem;">{{ section.settings.title | default: 'Choose Your Membership' }}</h2>
+    
+    <div class="grid grid--3-col">
+      {%- comment -%} Starter Plan {%- endcomment -%}
+      <div style="background-color: white; padding: 3rem; border: 2px solid var(--color-primary); text-align: center;">
+        <h3 style="font-size: 2.4rem; margin-bottom: 1rem;">Starter</h3>
+        <div style="font-size: 4.8rem; font-weight: 700; color: var(--color-primary); margin: 2rem 0;">
+          €195
+        </div>
+        <p style="font-size: 1.4rem; margin-bottom: 2rem; opacity: 0.8;">per year</p>
+        
+        <ul style="list-style: none; padding: 0; margin: 2rem 0; text-align: left;">
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            3 bottles (500ml) per year
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            15% member discount
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Free shipping
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Early harvest access
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Recipe collection
+          </li>
+        </ul>
+
+        <a href="#signup" class="button button--secondary" style="margin-top: 2rem;">
+          Join Starter
+        </a>
+      </div>
+
+      {%- comment -%} Premium Plan {%- endcomment -%}
+      <div style="background-color: var(--color-primary); padding: 3rem; border: 2px solid var(--color-accent); text-align: center; position: relative; transform: scale(1.05);">
+        <div style="position: absolute; top: -15px; left: 50%; transform: translateX(-50%); background-color: var(--color-accent); color: var(--color-primary); padding: 0.5rem 2rem; font-weight: 700; font-size: 1.2rem; text-transform: uppercase;">
+          Most Popular
+        </div>
+        <h3 style="font-size: 2.4rem; margin-bottom: 1rem; color: var(--color-secondary);">Premium</h3>
+        <div style="font-size: 4.8rem; font-weight: 700; color: var(--color-accent); margin: 2rem 0;">
+          €345
+        </div>
+        <p style="font-size: 1.4rem; margin-bottom: 2rem; opacity: 0.8; color: var(--color-secondary);">per year</p>
+        
+        <ul style="list-style: none; padding: 0; margin: 2rem 0; text-align: left; color: var(--color-secondary);">
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            6 bottles (500ml) per year
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            20% member discount
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Free priority shipping
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            First access to new harvest
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Italian recipe book
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Exclusive tasting notes
+          </li>
+        </ul>
+
+        <a href="#signup" class="button" style="margin-top: 2rem; background-color: var(--color-accent); border-color: var(--color-accent); color: var(--color-primary);">
+          Join Premium
+        </a>
+      </div>
+
+      {%- comment -%} Elite Plan {%- endcomment -%}
+      <div style="background-color: white; padding: 3rem; border: 2px solid var(--color-primary); text-align: center;">
+        <h3 style="font-size: 2.4rem; margin-bottom: 1rem;">Elite</h3>
+        <div style="font-size: 4.8rem; font-weight: 700; color: var(--color-primary); margin: 2rem 0;">
+          €625
+        </div>
+        <p style="font-size: 1.4rem; margin-bottom: 2rem; opacity: 0.8;">per year</p>
+        
+        <ul style="list-style: none; padding: 0; margin: 2rem 0; text-align: left;">
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            12 bottles (500ml) per year
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            25% member discount
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Free express shipping
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            VIP harvest allocation
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Luxury Italian gift box
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Private video call with family
+          </li>
+          <li style="margin-bottom: 1rem; padding-left: 2rem; position: relative;">
+            <span style="position: absolute; left: 0; color: var(--color-accent);">✓</span>
+            Invite to harvest festival
+          </li>
+        </ul>
+
+        <a href="#signup" class="button button--secondary" style="margin-top: 2rem;">
+          Join Elite
+        </a>
+      </div>
+    </div>
+
+    <p style="text-align: center; margin-top: 4rem; font-size: 1.6rem;">
+      All prices include free shipping. Cancel anytime with 30 days notice.
+    </p>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Harvest Club Options",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Choose Your Membership"
+    }
+  ]
+}
+{% endschema %}

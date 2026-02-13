@@ -1,0 +1,131 @@
+<section class="newsletter section">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <h2>{{ section.settings.title }}</h2>
+    {%- endif -%}
+
+    {%- if section.settings.text != blank -%}
+      <p>{{ section.settings.text }}</p>
+    {%- endif -%}
+
+    <div class="newsletter__form">
+      {%- if settings.klaviyo_list_id != blank -%}
+        {%- comment -%} Klaviyo form {%- endcomment -%}
+        <form class="klaviyo-form" action="https://manage.klayvio.com/ajax/subscriptions/subscribe" method="post" data-ajax-submit="//manage.klayvio.com/ajax/subscriptions/subscribe">
+          <input type="hidden" name="g" value="{{ settings.klaviyo_list_id }}">
+          <div class="newsletter__input-wrapper">
+            <input 
+              type="email" 
+              name="email" 
+              placeholder="{{ section.settings.placeholder | default: 'Enter your email' }}"
+              class="newsletter__input"
+              required
+            >
+            <button type="submit" class="button newsletter__button">
+              {{ section.settings.button_label | default: 'Subscribe' }}
+            </button>
+          </div>
+          <div class="newsletter__success" style="display: none; margin-top: 1rem;">
+            Thank you for subscribing!
+          </div>
+          <div class="newsletter__error" style="display: none; margin-top: 1rem;">
+            Please enter a valid email address.
+          </div>
+        </form>
+      {%- else -%}
+        {%- comment -%} Shopify customer form {%- endcomment -%}
+        {% form 'customer', class: 'newsletter-form' %}
+          {%- if form.posted_successfully? -%}
+            <div class="newsletter__success" style="margin-bottom: 1rem;">
+              Thank you for subscribing!
+            </div>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[tags]" value="newsletter">
+          <div class="newsletter__input-wrapper">
+            <input 
+              type="email" 
+              name="contact[email]" 
+              placeholder="{{ section.settings.placeholder | default: 'Enter your email' }}"
+              class="newsletter__input"
+              required
+            >
+            <button type="submit" class="button newsletter__button">
+              {{ section.settings.button_label | default: 'Subscribe' }}
+            </button>
+          </div>
+
+          {%- if form.errors -%}
+            <div class="newsletter__error" style="margin-top: 1rem;">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+        {% endform %}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Simple Klaviyo form handling (if Klaviyo is configured)
+  document.addEventListener('DOMContentLoaded', function() {
+    const klaviyoForm = document.querySelector('.klaviyo-form');
+    if (klaviyoForm) {
+      klaviyoForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        const email = this.querySelector('input[name="email"]').value;
+        
+        // Basic email validation
+        if (email && email.includes('@')) {
+          // Show success message
+          this.querySelector('.newsletter__success').style.display = 'block';
+          this.querySelector('.newsletter__error').style.display = 'none';
+          this.querySelector('input[name="email"]').value = '';
+        } else {
+          // Show error message
+          this.querySelector('.newsletter__error').style.display = 'block';
+          this.querySelector('.newsletter__success').style.display = 'none';
+        }
+      });
+    }
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "tag": "section",
+  "class": "newsletter-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Stay Connected"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Description",
+      "default": "Subscribe to receive updates about new harvests, recipes, and exclusive offers."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email Placeholder",
+      "default": "Enter your email"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Subscribe"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}

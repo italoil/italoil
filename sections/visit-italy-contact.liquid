@@ -1,0 +1,140 @@
+<section class="section" id="contact">
+  <div class="container">
+    <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+      <h2 style="margin-bottom: 2rem;">{{ section.settings.title | default: 'Plan Your Visit' }}</h2>
+      <p style="font-size: 1.8rem; margin-bottom: 4rem;">
+        {{ section.settings.description | default: 'Contact us to schedule your visit to Lake Bolsena. We recommend booking at least 2 weeks in advance, especially during harvest season.' }}
+      </p>
+
+      <div class="visit-form">
+        {% form 'contact' %}
+          {%- if form.posted_successfully? -%}
+            <div style="background-color: #d4edda; color: #155724; padding: 1.5rem; margin-bottom: 2rem; border-radius: 4px;">
+              Thank you! We'll contact you within 48 hours to confirm your visit.
+            </div>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div style="background-color: #f8d7da; color: #721c24; padding: 1.5rem; margin-bottom: 2rem; border-radius: 4px;">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[subject]" value="Visit Italy Request">
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="visit-name">Name *</label>
+            <input
+              type="text"
+              id="visit-name"
+              name="contact[name]"
+              required
+            >
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="visit-email">Email *</label>
+            <input
+              type="email"
+              id="visit-email"
+              name="contact[email]"
+              required
+            >
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="visit-phone">Phone</label>
+            <input
+              type="tel"
+              id="visit-phone"
+              name="contact[phone]"
+            >
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="visit-type">Visit Type *</label>
+            <select id="visit-type" name="contact[visit_type]" required style="width: 100%; padding: 1.2rem; border: 1px solid #ddd;">
+              <option value="">Select visit type</option>
+              <option value="Half-Day Visit (€45/person)">Half-Day Visit (€45/person)</option>
+              <option value="Full-Day Experience (€120/person)">Full-Day Experience (€120/person)</option>
+              <option value="Private Group Tour">Private Group Tour</option>
+              <option value="Custom Experience">Custom Experience</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="visit-date">Preferred Date</label>
+            <input
+              type="date"
+              id="visit-date"
+              name="contact[preferred_date]"
+              style="width: 100%; padding: 1.2rem; border: 1px solid #ddd;"
+            >
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="visit-guests">Number of Guests *</label>
+            <input
+              type="number"
+              id="visit-guests"
+              name="contact[guests]"
+              min="1"
+              max="50"
+              required
+              style="width: 100%; padding: 1.2rem; border: 1px solid #ddd;"
+            >
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="visit-message">Special Requests or Questions</label>
+            <textarea
+              id="visit-message"
+              name="contact[body]"
+              rows="4"
+              placeholder="Dietary restrictions, accessibility needs, language preferences, etc."
+            ></textarea>
+          </div>
+
+          <button type="submit" class="button button--full">
+            Submit Visit Request
+          </button>
+
+          <p style="margin-top: 2rem; font-size: 1.4rem; opacity: 0.8;">
+            Payment is made on arrival. We accept cash and credit cards.
+          </p>
+        {% endform %}
+      </div>
+
+      <div style="background-color: var(--color-secondary); padding: 3rem; margin-top: 4rem;">
+        <h3 style="margin-bottom: 2rem;">Have Questions?</h3>
+        <p style="font-size: 1.6rem; margin-bottom: 1rem;">
+          Email us at: <a href="mailto:italoil.store@gmail.com" style="color: var(--color-primary); font-weight: 600;">italoil.store@gmail.com</a>
+        </p>
+        <p style="font-size: 1.4rem;">
+          We typically respond within 24-48 hours
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Visit Italy Contact",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Plan Your Visit"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Contact us to schedule your visit to Lake Bolsena. We recommend booking at least 2 weeks in advance, especially during harvest season."
+    }
+  ]
+}
+{% endschema %}

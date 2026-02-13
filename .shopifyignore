@@ -1,0 +1,54 @@
+# Shopify CLI Ignore File
+# Files and directories listed here will not be uploaded to Shopify
+
+# Documentation files
+README.md
+README_THEME.md
+INSTALLATION.md
+QUICKSTART.md
+DEPLOYMENT_CHECKLIST.md
+SHOPIFY_CLI_GUIDE.md
+
+# Git files
+.git
+.gitignore
+.gitattributes
+
+# IDE and editor files
+.vscode
+.idea
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Node modules and dependencies
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+package-lock.json
+yarn.lock
+
+# Build artifacts
+dist/
+build/
+tmp/
+temp/
+
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Theme development files
+config.yml
+.theme-check.yml
+
+# OS files
+Thumbs.db
+.AppleDouble
+.LSOverride
+
+# Shopify CLI
+.shopify

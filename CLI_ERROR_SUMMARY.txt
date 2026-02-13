@@ -1,0 +1,72 @@
+╔══════════════════════════════════════════════════════════════════════════╗
+║            SHOPIFY CLI "NOT AUTHORIZED" ERROR - SOLVED                   ║
+╚══════════════════════════════════════════════════════════════════════════╝
+
+QUESTION: "What does this mean?"
+═══════════════════════════════════════════════════════════════════════════
+
+Error: "You are not authorized to use the CLI to develop in the provided 
+        store: itloil.store.myshopify.com"
+
+ANSWER: TWO PROBLEMS DETECTED
+═══════════════════════════════════════════════════════════════════════════
+
+1. STORE NAME TYPO
+   You typed:  itloil  ❌
+   Should be:  italoil ✅
+   (Missing the letter 'a')
+
+2. WRONG DOMAIN FORMAT  
+   You used:   itloil.store ❌
+   Should use: italoil.myshopify.com ✅
+   (Must use .myshopify.com, not custom domain)
+
+THE FIX
+═══════════════════════════════════════════════════════════════════════════
+
+# Use the correct store name and domain:
+shopify theme dev --store italoil.myshopify.com
+
+# Complete authentication reset:
+shopify auth logout
+shopify auth login
+shopify theme dev --store italoil.myshopify.com
+
+DOCUMENTATION ADDED
+═══════════════════════════════════════════════════════════════════════════
+
+✅ TROUBLESHOOTING.md (14KB)
+   - Complete authorization error guide
+   - All CLI errors and solutions
+   - Step-by-step fixes
+   - Quick reference table
+
+✅ ERROR_NOT_AUTHORIZED.md (1.7KB)
+   - Quick fix for your specific error
+   - Common typo examples
+   - Correct domain format
+
+✅ Updated Existing Docs
+   - SHOPIFY_CLI_GUIDE.md
+   - CLI_QUICK_ANSWER.md
+   - README.md
+   - DEVELOPMENT.md
+
+WHERE TO FIND HELP
+═══════════════════════════════════════════════════════════════════════════
+
+📖 Immediate Fix:     ERROR_NOT_AUTHORIZED.md
+📖 All CLI Errors:    TROUBLESHOOTING.md
+📖 CLI Reference:     SHOPIFY_CLI_GUIDE.md
+📖 Quick Start:       CLI_QUICK_ANSWER.md
+
+WHAT TO DO NOW
+═══════════════════════════════════════════════════════════════════════════
+
+1. Read ERROR_NOT_AUTHORIZED.md for quick fix
+2. Run: shopify theme dev --store italoil.myshopify.com
+3. If other issues, check TROUBLESHOOTING.md
+
+╔══════════════════════════════════════════════════════════════════════════╗
+║  REMEMBER: italoil (with 'a') + .myshopify.com                          ║
+╚══════════════════════════════════════════════════════════════════════════╝

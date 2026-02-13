@@ -1,0 +1,143 @@
+<section class="section">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 4rem;">{{ section.settings.title | default: 'Wholesale Pricing' }}</h2>
+    
+    <div style="max-width: 900px; margin: 0 auto;">
+      <p style="text-align: center; font-size: 1.8rem; margin-bottom: 4rem;">
+        {{ section.settings.description | default: 'Our wholesale program offers competitive case pricing for businesses. All prices are per case of 12 bottles.' }}
+      </p>
+
+      <table class="price-table">
+        <thead>
+          <tr>
+            <th>Product Size</th>
+            <th>Price per Bottle</th>
+            <th>Case Price (12 bottles)</th>
+            <th>Minimum Order</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>500ml Bottle</strong></td>
+            <td class="price">{{ section.settings.price_500ml | default: '€24.00' }}</td>
+            <td class="price">{{ section.settings.case_price_500ml | default: '€265.00' }}</td>
+            <td>{{ section.settings.min_order_500ml | default: '1 case' }}</td>
+          </tr>
+          <tr>
+            <td><strong>250ml Bottle</strong></td>
+            <td class="price">{{ section.settings.price_250ml | default: '€14.00' }}</td>
+            <td class="price">{{ section.settings.case_price_250ml | default: '€155.00' }}</td>
+            <td>{{ section.settings.min_order_250ml | default: '1 case' }}</td>
+          </tr>
+          <tr>
+            <td><strong>100ml Bottle</strong></td>
+            <td class="price">{{ section.settings.price_100ml | default: '€8.00' }}</td>
+            <td class="price">{{ section.settings.case_price_100ml | default: '€90.00' }}</td>
+            <td>{{ section.settings.min_order_100ml | default: '2 cases' }}</td>
+          </tr>
+        </tbody>
+      </table>
+
+      <div style="background-color: var(--color-secondary); padding: 3rem; margin-top: 4rem; border-left: 4px solid var(--color-accent);">
+        <h3 style="margin-bottom: 1.5rem;">Volume Discounts Available</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li style="margin-bottom: 1rem;">✓ 5-10 cases: 5% discount</li>
+          <li style="margin-bottom: 1rem;">✓ 11-20 cases: 10% discount</li>
+          <li style="margin-bottom: 1rem;">✓ 21+ cases: 15% discount</li>
+          <li style="margin-bottom: 1rem;">✓ Custom pricing available for large orders</li>
+        </ul>
+      </div>
+
+      <div style="text-align: center; margin-top: 4rem;">
+        <a href="#contact" class="button">Request Wholesale Account</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wholesale Pricing Table",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Wholesale Pricing"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Our wholesale program offers competitive case pricing for businesses. All prices are per case of 12 bottles."
+    },
+    {
+      "type": "header",
+      "content": "500ml Pricing"
+    },
+    {
+      "type": "text",
+      "id": "price_500ml",
+      "label": "Price per Bottle",
+      "default": "€24.00"
+    },
+    {
+      "type": "text",
+      "id": "case_price_500ml",
+      "label": "Case Price",
+      "default": "€265.00"
+    },
+    {
+      "type": "text",
+      "id": "min_order_500ml",
+      "label": "Minimum Order",
+      "default": "1 case"
+    },
+    {
+      "type": "header",
+      "content": "250ml Pricing"
+    },
+    {
+      "type": "text",
+      "id": "price_250ml",
+      "label": "Price per Bottle",
+      "default": "€14.00"
+    },
+    {
+      "type": "text",
+      "id": "case_price_250ml",
+      "label": "Case Price",
+      "default": "€155.00"
+    },
+    {
+      "type": "text",
+      "id": "min_order_250ml",
+      "label": "Minimum Order",
+      "default": "1 case"
+    },
+    {
+      "type": "header",
+      "content": "100ml Pricing"
+    },
+    {
+      "type": "text",
+      "id": "price_100ml",
+      "label": "Price per Bottle",
+      "default": "€8.00"
+    },
+    {
+      "type": "text",
+      "id": "case_price_100ml",
+      "label": "Case Price",
+      "default": "€90.00"
+    },
+    {
+      "type": "text",
+      "id": "min_order_100ml",
+      "label": "Minimum Order",
+      "default": "2 cases"
+    }
+  ]
+}
+{% endschema %}

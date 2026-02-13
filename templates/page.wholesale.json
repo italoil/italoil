@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "page-header": {
+      "type": "page-header-wholesale",
+      "settings": {
+      }
+    },
+    "wholesale-pricing": {
+      "type": "wholesale-pricing",
+      "settings": {
+      }
+    },
+    "wholesale-benefits": {
+      "type": "wholesale-benefits",
+      "settings": {
+      }
+    },
+    "wholesale-contact": {
+      "type": "wholesale-contact",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "page-header",
+    "wholesale-pricing",
+    "wholesale-benefits",
+    "wholesale-contact"
+  ]
+}
