@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "visit-italy-hero": {
+      "type": "visit-italy-hero",
+      "settings": {
+      }
+    },
+    "visit-italy-experience": {
+      "type": "visit-italy-experience",
+      "settings": {
+      }
+    },
+    "visit-italy-location": {
+      "type": "visit-italy-location",
+      "settings": {
+      }
+    },
+    "visit-italy-contact": {
+      "type": "visit-italy-contact",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "visit-italy-hero",
+    "visit-italy-experience",
+    "visit-italy-location",
+    "visit-italy-contact"
+  ]
+}

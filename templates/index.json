@@ -1,0 +1,47 @@
+{
+  "sections": {
+    "hero": {
+      "type": "hero",
+      "settings": {
+        "title": "ITALOIL",
+        "subtitle": "Premium Italian Extra Virgin Olive Oil from Lake Bolsena",
+        "button_label_1": "Shop Now",
+        "button_link_1": "/collections/all",
+        "button_label_2": "Our Story",
+        "button_link_2": "/pages/about"
+      }
+    },
+    "brand-story": {
+      "type": "brand-story",
+      "settings": {
+        "title": "Our Story",
+        "text": "<p>For generations, our family has cultivated olive groves around the scenic Lake Bolsena in Italy. We handpick our olives during the day and cold-press them the same evening to preserve their exceptional quality, minimal acidity, and fresh flavor.</p><p>Our groves have never been treated with pesticides or chemicals, ensuring a natural and healthy product. From production to importation and direct sale, we handle every step without intermediaries, taking 100% responsibility for quality and consistency.</p>",
+        "button_label": "Learn More About Us",
+        "button_link": "/pages/about"
+      }
+    },
+    "featured-products": {
+      "type": "featured-products",
+      "settings": {
+        "title": "Our Olive Oils",
+        "products_to_show": 3,
+        "show_view_all": true
+      }
+    },
+    "newsletter": {
+      "type": "newsletter",
+      "settings": {
+        "title": "Stay Connected",
+        "text": "Subscribe to receive updates about new harvests, recipes, and exclusive offers from Lake Bolsena.",
+        "placeholder": "Enter your email",
+        "button_label": "Subscribe"
+      }
+    }
+  },
+  "order": [
+    "hero",
+    "brand-story",
+    "featured-products",
+    "newsletter"
+  ]
+}

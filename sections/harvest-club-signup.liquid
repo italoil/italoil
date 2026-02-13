@@ -1,0 +1,117 @@
+<section class="section" id="signup">
+  <div class="container">
+    <div style="max-width: 700px; margin: 0 auto; text-align: center;">
+      <h2 style="margin-bottom: 2rem;">{{ section.settings.title | default: 'Join the Harvest Club' }}</h2>
+      <p style="font-size: 1.8rem; margin-bottom: 4rem;">
+        {{ section.settings.description | default: 'Fill out the form below to start your membership. We\'ll send you a confirmation email with all the details.' }}
+      </p>
+
+      <div class="harvest-club-form">
+        {% form 'contact' %}
+          {%- if form.posted_successfully? -%}
+            <div style="background-color: #d4edda; color: #155724; padding: 1.5rem; margin-bottom: 2rem; border-radius: 4px;">
+              Thank you for joining the Harvest Club! Check your email for next steps.
+            </div>
+          {%- endif -%}
+
+          {%- if form.errors -%}
+            <div style="background-color: #f8d7da; color: #721c24; padding: 1.5rem; margin-bottom: 2rem; border-radius: 4px;">
+              {{ form.errors | default_errors }}
+            </div>
+          {%- endif -%}
+
+          <input type="hidden" name="contact[subject]" value="Harvest Club Membership">
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="hc-name">Full Name *</label>
+            <input
+              type="text"
+              id="hc-name"
+              name="contact[name]"
+              required
+            >
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="hc-email">Email *</label>
+            <input
+              type="email"
+              id="hc-email"
+              name="contact[email]"
+              required
+            >
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="hc-phone">Phone</label>
+            <input
+              type="tel"
+              id="hc-phone"
+              name="contact[phone]"
+            >
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="hc-plan">Membership Plan *</label>
+            <select id="hc-plan" name="contact[plan]" required style="width: 100%; padding: 1.2rem; border: 1px solid #ddd;">
+              <option value="">Select a plan</option>
+              <option value="Starter - 3 bottles (€195/year)">Starter - 3 bottles (€195/year)</option>
+              <option value="Premium - 6 bottles (€345/year)">Premium - 6 bottles (€345/year)</option>
+              <option value="Elite - 12 bottles (€625/year)">Elite - 12 bottles (€625/year)</option>
+            </select>
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="hc-address">Shipping Address *</label>
+            <textarea
+              id="hc-address"
+              name="contact[address]"
+              rows="3"
+              placeholder="Street, City, Postal Code, Country"
+              required
+            ></textarea>
+          </div>
+
+          <div style="margin-bottom: 2rem; text-align: left;">
+            <label for="hc-message">Additional Notes (Optional)</label>
+            <textarea
+              id="hc-message"
+              name="contact[body]"
+              rows="3"
+              placeholder="Any special requests or questions?"
+            ></textarea>
+          </div>
+
+          <button type="submit" class="button button--full">
+            Submit Membership Request
+          </button>
+
+          <p style="margin-top: 2rem; font-size: 1.4rem; opacity: 0.8;">
+            After submitting, you'll receive a payment link to complete your membership.
+          </p>
+        {% endform %}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Harvest Club Signup",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Join the Harvest Club"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Fill out the form below to start your membership. We'll send you a confirmation email with all the details."
+    }
+  ]
+}
+{% endschema %}

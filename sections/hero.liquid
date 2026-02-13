@@ -1,0 +1,96 @@
+<section class="hero section">
+  <div class="container">
+    {%- if section.settings.image != blank -%}
+      <img 
+        src="{{ section.settings.image | image_url: width: 1920 }}"
+        srcset="{{ section.settings.image | image_url: width: 600 }} 600w,
+                {{ section.settings.image | image_url: width: 1200 }} 1200w,
+                {{ section.settings.image | image_url: width: 1920 }} 1920w"
+        sizes="100vw"
+        alt="{{ section.settings.image.alt | escape }}"
+        class="hero__image"
+        loading="eager"
+      >
+    {%- endif -%}
+
+    <div class="hero__content fade-in">
+      {%- if section.settings.title != blank -%}
+        <h1 class="hero__title">{{ section.settings.title }}</h1>
+      {%- endif -%}
+
+      {%- if section.settings.subtitle != blank -%}
+        <p class="hero__subtitle">{{ section.settings.subtitle }}</p>
+      {%- endif -%}
+
+      {%- if section.settings.button_label_1 != blank or section.settings.button_label_2 != blank -%}
+        <div class="hero__buttons">
+          {%- if section.settings.button_label_1 != blank -%}
+            <a href="{{ section.settings.button_link_1 }}" class="button">
+              {{ section.settings.button_label_1 }}
+            </a>
+          {%- endif -%}
+
+          {%- if section.settings.button_label_2 != blank -%}
+            <a href="{{ section.settings.button_link_2 }}" class="button button--secondary">
+              {{ section.settings.button_label_2 }}
+            </a>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero Banner",
+  "tag": "section",
+  "class": "hero-section",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "ITALOIL"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subheading",
+      "default": "Premium Italian Extra Virgin Olive Oil from Lake Bolsena"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "First Button Label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "First Button Link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Second Button Label",
+      "default": "Our Story"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Second Button Link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero Banner"
+    }
+  ]
+}
+{% endschema %}

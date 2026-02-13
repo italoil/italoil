@@ -1,0 +1,15 @@
+<div class="page-header" {% if collection.image %}style="background-image: url('{{ collection.image | image_url: width: 1920 }}'); background-size: cover; background-position: center;"{% endif %}>
+  <div class="container">
+    <h1>{{ collection.title }}</h1>
+    {%- if collection.description != blank -%}
+      <div class="rte">{{ collection.description }}</div>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Collection Banner",
+  "tag": "section"
+}
+{% endschema %}

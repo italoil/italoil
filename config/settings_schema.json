@@ -1,0 +1,136 @@
+[
+  {
+    "name": "theme_info",
+    "theme_name": "ITALOIL",
+    "theme_version": "1.0.0",
+    "theme_author": "ITALOIL",
+    "theme_documentation_url": "https://italoil.com",
+    "theme_support_url": "https://italoil.com/support"
+  },
+  {
+    "name": "Colors",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Brand Colors"
+      },
+      {
+        "type": "color",
+        "id": "color_primary",
+        "label": "Primary Color (Deep Green)",
+        "default": "#2C5530"
+      },
+      {
+        "type": "color",
+        "id": "color_secondary",
+        "label": "Secondary Color (Cream)",
+        "default": "#F5F1E8"
+      },
+      {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Accent Color (Gold)",
+        "default": "#C8A882"
+      },
+      {
+        "type": "color",
+        "id": "color_text",
+        "label": "Text Color",
+        "default": "#333333"
+      },
+      {
+        "type": "color",
+        "id": "color_background",
+        "label": "Background Color",
+        "default": "#FFFFFF"
+      }
+    ]
+  },
+  {
+    "name": "Typography",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Fonts"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_header_font",
+        "label": "Heading Font",
+        "default": "playfair_display_n4"
+      },
+      {
+        "type": "font_picker",
+        "id": "type_body_font",
+        "label": "Body Font",
+        "default": "lato_n4"
+      }
+    ]
+  },
+  {
+    "name": "Product Settings",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Product Display"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_vendor",
+        "label": "Show vendor",
+        "default": false
+      },
+      {
+        "type": "checkbox",
+        "id": "product_show_sku",
+        "label": "Show SKU",
+        "default": false
+      }
+    ]
+  },
+  {
+    "name": "Email & Newsletter",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Klaviyo Integration"
+      },
+      {
+        "type": "text",
+        "id": "klaviyo_list_id",
+        "label": "Klaviyo List ID",
+        "info": "Enter your Klaviyo list ID for newsletter signups"
+      },
+      {
+        "type": "checkbox",
+        "id": "enable_newsletter",
+        "label": "Enable newsletter signup",
+        "default": true
+      }
+    ]
+  },
+  {
+    "name": "Social Media",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Social Links"
+      },
+      {
+        "type": "text",
+        "id": "social_facebook",
+        "label": "Facebook URL"
+      },
+      {
+        "type": "text",
+        "id": "social_instagram",
+        "label": "Instagram URL"
+      },
+      {
+        "type": "text",
+        "id": "social_pinterest",
+        "label": "Pinterest URL"
+      }
+    ]
+  }
+]

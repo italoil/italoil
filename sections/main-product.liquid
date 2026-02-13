@@ -1,0 +1,281 @@
+<section class="section">
+  <div class="container">
+    <div class="product">
+      <div class="grid grid--2-col">
+        <div class="product__media">
+          {%- if product.media.size > 0 -%}
+            <div class="product__media-list">
+              {%- for media in product.media -%}
+                <div class="product__media-item" {% if forloop.index > 1 %}style="display: none;"{% endif %} data-media-id="{{ media.id }}">
+                  {%- if media.media_type == 'image' -%}
+                    <img
+                      src="{{ media | image_url: width: 1000 }}"
+                      srcset="{{ media | image_url: width: 500 }} 500w,
+                              {{ media | image_url: width: 1000 }} 1000w"
+                      sizes="(min-width: 1024px) 50vw, 100vw"
+                      alt="{{ media.alt | escape }}"
+                      loading="lazy"
+                      style="width: 100%; height: auto;"
+                    >
+                  {%- endif -%}
+                </div>
+              {%- endfor -%}
+            </div>
+
+            {%- if product.media.size > 1 -%}
+              <div class="product__media-thumbnails" style="display: flex; gap: 1rem; margin-top: 1rem; overflow-x: auto;">
+                {%- for media in product.media -%}
+                  <button 
+                    type="button"
+                    class="product__media-thumbnail"
+                    data-media-id="{{ media.id }}"
+                    style="border: 2px solid {% if forloop.first %}var(--color-primary){% else %}transparent{% endif %}; padding: 0.5rem; cursor: pointer; background: none; flex-shrink: 0;"
+                  >
+                    <img
+                      src="{{ media | image_url: width: 100 }}"
+                      alt="{{ media.alt | escape }}"
+                      style="width: 80px; height: 80px; object-fit: cover;"
+                    >
+                  </button>
+                {%- endfor -%}
+              </div>
+            {%- endif -%}
+          {%- else -%}
+            {{ 'product-1' | placeholder_svg_tag }}
+          {%- endif -%}
+        </div>
+
+        <div class="product__info">
+          <h1 style="margin-bottom: 1rem;">{{ product.title }}</h1>
+
+          {%- if product.vendor != blank and settings.product_show_vendor -%}
+            <p style="margin-bottom: 1rem; font-size: 1.4rem;">{{ product.vendor }}</p>
+          {%- endif -%}
+
+          <div class="product__price" style="font-size: 2.8rem; font-weight: 600; color: var(--color-primary); margin-bottom: 2rem;">
+            {%- if product.compare_at_price > product.price -%}
+              <span style="text-decoration: line-through; opacity: 0.6; margin-right: 1rem; font-size: 2rem;">
+                {{ product.compare_at_price | money }}
+              </span>
+            {%- endif -%}
+            {{ product.price | money }}
+          </div>
+
+          {%- if product.description != blank -%}
+            <div class="product__description rte" style="margin-bottom: 2rem; line-height: 1.8;">
+              {{ product.description }}
+            </div>
+          {%- endif -%}
+
+          {% form 'product', product, id: 'product-form' %}
+            <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+
+            {%- unless product.has_only_default_variant -%}
+              <div class="product__variants" style="margin-bottom: 2rem;">
+                {%- for option in product.options_with_values -%}
+                  <div style="margin-bottom: 1.5rem;">
+                    <label for="option-{{ option.position }}" style="display: block; margin-bottom: 0.8rem; font-weight: 600;">
+                      {{ option.name }}
+                    </label>
+                    <select
+                      id="option-{{ option.position }}"
+                      name="options[{{ option.name | escape }}]"
+                      class="product-form__input"
+                      style="width: 100%; padding: 1.2rem; border: 1px solid #ddd;"
+                    >
+                      {%- for value in option.values -%}
+                        <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>
+                          {{ value }}
+                        </option>
+                      {%- endfor -%}
+                    </select>
+                  </div>
+                {%- endfor -%}
+              </div>
+            {%- endunless -%}
+
+            <div class="product__quantity" style="margin-bottom: 2rem;">
+              <label for="quantity" style="display: block; margin-bottom: 0.8rem; font-weight: 600;">Quantity</label>
+              <input
+                type="number"
+                id="quantity"
+                name="quantity"
+                value="1"
+                min="1"
+                style="width: 100px; padding: 1.2rem; border: 1px solid #ddd;"
+              >
+            </div>
+
+            <div class="product__submit">
+              <button
+                type="submit"
+                name="add"
+                class="button button--full"
+                {% if product.available == false %}disabled{% endif %}
+              >
+                {%- if product.available -%}
+                  Add to Cart
+                {%- else -%}
+                  Sold Out
+                {%- endif -%}
+              </button>
+            </div>
+
+            {%- if settings.product_show_sku and product.selected_or_first_available_variant.sku != blank -%}
+              <p style="margin-top: 1rem; font-size: 1.4rem; color: #666;">
+                SKU: {{ product.selected_or_first_available_variant.sku }}
+              </p>
+            {%- endif -%}
+          {% endform %}
+
+          {%- if product.metafields.custom.certifications != blank -%}
+            <div class="product__certifications" style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid #ddd;">
+              <h3 style="font-size: 1.8rem; margin-bottom: 1rem;">Certifications</h3>
+              <div>{{ product.metafields.custom.certifications }}</div>
+            </div>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+  // Handle variant selection
+  document.addEventListener('DOMContentLoaded', function() {
+    const productForm = document.getElementById('product-form');
+    if (productForm) {
+      const variantSelects = productForm.querySelectorAll('.product-form__input');
+      
+      variantSelects.forEach(select => {
+        select.addEventListener('change', function() {
+          updateVariant();
+        });
+      });
+
+      function updateVariant() {
+        const formData = new FormData(productForm);
+        const options = {};
+        
+        variantSelects.forEach(select => {
+          options[select.name] = select.value;
+        });
+
+        // Find matching variant
+        const variant = {{ product.variants | json }}.find(v => {
+          return Object.keys(options).every(key => {
+            const optionIndex = parseInt(key.match(/\d+/)[0]) - 1;
+            return v.options[optionIndex] === options[key];
+          });
+        });
+
+        if (variant) {
+          productForm.querySelector('input[name="id"]').value = variant.id;
+          
+          // Update price
+          const priceElement = document.querySelector('.product__price');
+          if (priceElement) {
+            let priceHTML = '';
+            if (variant.compare_at_price > variant.price) {
+              priceHTML += `<span style="text-decoration: line-through; opacity: 0.6; margin-right: 1rem; font-size: 2rem;">${Shopify.formatMoney(variant.compare_at_price)}</span>`;
+            }
+            priceHTML += Shopify.formatMoney(variant.price);
+            priceElement.innerHTML = priceHTML;
+          }
+
+          // Update button
+          const submitButton = productForm.querySelector('button[type="submit"]');
+          if (variant.available) {
+            submitButton.disabled = false;
+            submitButton.textContent = 'Add to Cart';
+          } else {
+            submitButton.disabled = true;
+            submitButton.textContent = 'Sold Out';
+          }
+        }
+      }
+    }
+
+    // Handle media thumbnails
+    const thumbnails = document.querySelectorAll('.product__media-thumbnail');
+    thumbnails.forEach(thumbnail => {
+      thumbnail.addEventListener('click', function() {
+        const mediaId = this.dataset.mediaId;
+        
+        // Hide all media items
+        document.querySelectorAll('.product__media-item').forEach(item => {
+          item.style.display = 'none';
+        });
+        
+        // Show selected media item
+        const selectedMedia = document.querySelector(`.product__media-item[data-media-id="${mediaId}"]`);
+        if (selectedMedia) {
+          selectedMedia.style.display = 'block';
+        }
+        
+        // Update thumbnail borders
+        thumbnails.forEach(t => {
+          t.style.borderColor = 'transparent';
+        });
+        this.style.borderColor = 'var(--color-primary)';
+      });
+    });
+  });
+
+  // Shopify money format helper
+  if (typeof Shopify === 'undefined') {
+    Shopify = {};
+  }
+  Shopify.formatMoney = function(cents, format) {
+    const money_format = '€{{amount_with_comma_separator}}';
+    if (typeof cents === 'string') {
+      cents = cents.replace('.', '');
+    }
+    let value = '';
+    const placeholderRegex = /\{\{\s*(\w+)\s*\}\}/;
+    const formatString = format || money_format;
+
+    function formatWithDelimiters(number, precision, thousands, decimal) {
+      precision = precision || 2;
+      thousands = thousands || ',';
+      decimal = decimal || '.';
+
+      if (isNaN(number) || number == null) {
+        return 0;
+      }
+
+      number = (number / 100.0).toFixed(precision);
+
+      const parts = number.split('.');
+      const dollars = parts[0].replace(/(\d)(?=(\d\d\d)+(?!\d))/g, '$1' + thousands);
+      const cents = parts[1] ? decimal + parts[1] : '';
+
+      return dollars + cents;
+    }
+
+    switch (formatString.match(placeholderRegex)[1]) {
+      case 'amount':
+        value = formatWithDelimiters(cents, 2);
+        break;
+      case 'amount_no_decimals':
+        value = formatWithDelimiters(cents, 0);
+        break;
+      case 'amount_with_comma_separator':
+        value = formatWithDelimiters(cents, 2, '.', ',');
+        break;
+      case 'amount_no_decimals_with_comma_separator':
+        value = formatWithDelimiters(cents, 0, '.', ',');
+        break;
+    }
+
+    return formatString.replace(placeholderRegex, value);
+  };
+</script>
+
+{% schema %}
+{
+  "name": "Product Information",
+  "tag": "section",
+  "class": "product-section"
+}
+{% endschema %}

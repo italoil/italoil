@@ -1,0 +1,75 @@
+<section class="section">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 4rem;">{{ section.settings.title | default: 'Harvest Club Benefits' }}</h2>
+    
+    <div class="grid grid--2-col" style="max-width: 1000px; margin: 0 auto;">
+      <div style="padding: 3rem; background-color: var(--color-secondary);">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">🍾</div>
+        <h3 style="font-size: 2.2rem; margin-bottom: 1.5rem;">Early Harvest Priority</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8;">
+          Be among the first to receive our premium early harvest olive oil, pressed within hours of picking for maximum freshness and flavor.
+        </p>
+      </div>
+
+      <div style="padding: 3rem; background-color: var(--color-secondary);">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">💰</div>
+        <h3 style="font-size: 2.2rem; margin-bottom: 1.5rem;">Exclusive Pricing</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8;">
+          Save 15% on all shipments compared to regular pricing. Lock in member rates for the entire year.
+        </p>
+      </div>
+
+      <div style="padding: 3rem; background-color: var(--color-secondary);">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">📦</div>
+        <h3 style="font-size: 2.2rem; margin-bottom: 1.5rem;">Free Shipping</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8;">
+          Enjoy complimentary shipping on all Harvest Club deliveries throughout the year.
+        </p>
+      </div>
+
+      <div style="padding: 3rem; background-color: var(--color-secondary);">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">🎁</div>
+        <h3 style="font-size: 2.2rem; margin-bottom: 1.5rem;">Members-Only Gifts</h3>
+        <p style="font-size: 1.7rem; line-height: 1.8;">
+          Receive exclusive Italian products, recipes, and surprise gifts with your shipments throughout the year.
+        </p>
+      </div>
+    </div>
+
+    <div style="background-color: var(--color-primary); color: var(--color-secondary); padding: 4rem; margin-top: 4rem; text-align: center;">
+      <h3 style="color: var(--color-secondary); font-size: 2.8rem; margin-bottom: 1.5rem;">How It Works</h3>
+      <div class="grid grid--3-col" style="margin-top: 3rem;">
+        <div>
+          <div style="font-size: 3rem; margin-bottom: 1rem;">1️⃣</div>
+          <h4 style="color: var(--color-accent); margin-bottom: 1rem;">Choose Your Plan</h4>
+          <p>Select from our 3, 6, or 12-bottle annual subscriptions.</p>
+        </div>
+        <div>
+          <div style="font-size: 3rem; margin-bottom: 1rem;">2️⃣</div>
+          <h4 style="color: var(--color-accent); margin-bottom: 1rem;">Harvest Time</h4>
+          <p>We harvest our olives and press them the same day for peak freshness.</p>
+        </div>
+        <div>
+          <div style="font-size: 3rem; margin-bottom: 1rem;">3️⃣</div>
+          <h4 style="color: var(--color-accent); margin-bottom: 1rem;">Delivered to You</h4>
+          <p>Receive your allocation shipped directly from Lake Bolsena to your door.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Harvest Club Benefits",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Harvest Club Benefits"
+    }
+  ]
+}
+{% endschema %}

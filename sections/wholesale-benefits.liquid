@@ -1,0 +1,58 @@
+<section class="section" style="background-color: var(--color-secondary);">
+  <div class="container">
+    <h2 style="text-align: center; margin-bottom: 4rem;">{{ section.settings.title | default: 'Why Partner With ITALOIL?' }}</h2>
+    
+    <div class="grid grid--3-col">
+      <div style="text-align: center; padding: 2rem;">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">🌿</div>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">100% Organic</h3>
+        <p>Our olive groves have never been treated with pesticides or chemicals, ensuring pure, healthy oil.</p>
+      </div>
+
+      <div style="text-align: center; padding: 2rem;">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">🏅</div>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">DOP Certified</h3>
+        <p>Protected Designation of Origin certification guarantees authenticity and quality from Lake Bolsena.</p>
+      </div>
+
+      <div style="text-align: center; padding: 2rem;">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">👨‍🌾</div>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Family-Owned</h3>
+        <p>Generations of Italian tradition in every bottle. We control quality from grove to bottle.</p>
+      </div>
+
+      <div style="text-align: center; padding: 2rem;">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">⏰</div>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Same-Day Pressing</h3>
+        <p>Handpicked and cold-pressed the same evening to preserve freshness and minimal acidity.</p>
+      </div>
+
+      <div style="text-align: center; padding: 2rem;">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">🚫</div>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">No Intermediaries</h3>
+        <p>Direct from our family to you. 100% control over quality and consistency.</p>
+      </div>
+
+      <div style="text-align: center; padding: 2rem;">
+        <div style="font-size: 4rem; color: var(--color-accent); margin-bottom: 1.5rem;">🌍</div>
+        <h3 style="font-size: 2rem; margin-bottom: 1rem;">Sustainable</h3>
+        <p>Traditional methods meet ecological practices for sustainable Italian olive oil production.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Wholesale Benefits",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Why Partner With ITALOIL?"
+    }
+  ]
+}
+{% endschema %}

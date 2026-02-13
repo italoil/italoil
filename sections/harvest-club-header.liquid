@@ -1,0 +1,25 @@
+<div class="hero section" style="min-height: 50vh; background: linear-gradient(135deg, var(--color-secondary) 0%, #e8e2d0 100%);">
+  <div class="container">
+    <div class="hero__content fade-in">
+      <h1 class="hero__title">{{ page.title | default: 'Harvest Club' }}</h1>
+      <p class="hero__subtitle">
+        {{ section.settings.subtitle | default: 'Join our exclusive community and receive fresh-pressed olive oil from each harvest, delivered directly to your door.' }}
+      </p>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Harvest Club Header",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Join our exclusive community and receive fresh-pressed olive oil from each harvest, delivered directly to your door."
+    }
+  ]
+}
+{% endschema %}

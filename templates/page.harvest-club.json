@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "page-header": {
+      "type": "harvest-club-header",
+      "settings": {
+      }
+    },
+    "harvest-club-benefits": {
+      "type": "harvest-club-benefits",
+      "settings": {
+      }
+    },
+    "harvest-club-options": {
+      "type": "harvest-club-options",
+      "settings": {
+      }
+    },
+    "harvest-club-signup": {
+      "type": "harvest-club-signup",
+      "settings": {
+      }
+    }
+  },
+  "order": [
+    "page-header",
+    "harvest-club-benefits",
+    "harvest-club-options",
+    "harvest-club-signup"
+  ]
+}
