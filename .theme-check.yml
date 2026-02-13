@@ -5,8 +5,7 @@
 require: []
 
 # Ignore specific checks if needed
-ignore:
-  # No ignores by default - fix all issues
+ignore: []
 
 # Paths to exclude from checking
 exclude:

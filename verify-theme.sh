@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/usr/bin/env bash
 
 # ITALOIL Theme Verification Script
 # Validates theme structure before using Shopify CLI
