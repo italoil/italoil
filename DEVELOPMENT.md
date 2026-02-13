@@ -119,6 +119,11 @@ italoil/
 
 ## Troubleshooting
 
+**Authorization errors?**
+- See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#authorization-errors)
+- Check for store name typos (itloil vs italoil)
+- Use `.myshopify.com` domain format
+
 **Dev server not syncing?**
 ```bash
 # Stop (Ctrl+C) and restart
@@ -136,8 +141,11 @@ shopify auth login
 # Wait 1 minute and try again
 ```
 
+**For detailed troubleshooting**, see [TROUBLESHOOTING.md](./TROUBLESHOOTING.md)
+
 ## Full Documentation
 
+- [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) - Common errors and solutions
 - [SHOPIFY_CLI_GUIDE.md](./SHOPIFY_CLI_GUIDE.md) - Complete CLI docs
 - [README_THEME.md](./README_THEME.md) - Theme architecture
 - [INSTALLATION.md](./INSTALLATION.md) - Setup guide

@@ -47,6 +47,8 @@ shopify theme dev
 
 See [SHOPIFY_CLI_GUIDE.md](./SHOPIFY_CLI_GUIDE.md) for complete Shopify CLI documentation.
 
+**Having issues?** See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for common error solutions.
+
 ### Option B: Manual Upload
 
 1. Clone this repository

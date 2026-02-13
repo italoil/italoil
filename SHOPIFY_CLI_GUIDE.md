@@ -292,46 +292,40 @@ shopify theme push --live --store your-production-store.myshopify.com
 
 ## Troubleshooting
 
-### "Not authenticated" error
+For detailed troubleshooting of common errors, see **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)**.
 
-Run:
+### Common Quick Fixes
+
+**Authorization errors** (including "not authorized to use CLI"):
+- Check for typos in store name (e.g., "itloil" vs "italoil")
+- Use permanent domain: `store.myshopify.com` (not custom domain)
+- See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#authorization-errors) for complete guide
+
+**"Not authenticated" error:**
 ```bash
 shopify auth logout
 shopify auth login
 ```
 
-### "Theme not found" error
-
-List themes and verify the theme ID:
+**"Theme not found" error:**
 ```bash
 shopify theme list
 ```
 
-### Files not syncing during dev
-
+**Files not syncing during dev:**
 1. Stop the dev server (Ctrl+C)
 2. Clear the `.shopify` directory
 3. Restart: `shopify theme dev`
 
-### Git conflicts with .shopify directory
+**"Too many requests" error:**
+- Shopify has rate limits. Wait 60 seconds and try again.
 
-The `.shopify` directory is gitignored. Each developer has their own local config.
-
-### "Too many requests" error
-
-Shopify has rate limits. Wait a moment and try again.
-
-### Theme check errors
-
-Fix reported issues:
+**Theme check errors:**
 ```bash
 shopify theme check
 ```
 
-Common issues:
-- Missing alt text on images
-- Large asset file sizes
-- Deprecated Liquid tags
+For comprehensive troubleshooting including authorization errors, connection issues, and file sync problems, see **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)**.
 
 ## Advanced Usage
 

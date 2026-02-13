@@ -133,9 +133,15 @@ To enable Shopify CLI, I added:
 ## 🆘 Need Help?
 
 - **Quick questions**: Check DEVELOPMENT.md
-- **CLI issues**: See SHOPIFY_CLI_GUIDE.md troubleshooting section
+- **Common errors**: See **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** (authorization, connection, sync issues)
+- **CLI reference**: See SHOPIFY_CLI_GUIDE.md
 - **Theme questions**: Read README_THEME.md
 - **Support**: Email italoil.store@gmail.com
+
+**Getting authorization errors?** Check [TROUBLESHOOTING.md](./TROUBLESHOOTING.md#authorization-errors) for:
+- Store name typo fixes
+- Domain format issues
+- Permission problems
 
 ---
 
