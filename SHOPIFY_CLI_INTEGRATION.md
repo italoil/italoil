@@ -68,7 +68,7 @@ Start local development with live preview:
 shopify theme dev
 ```
 
-Access your development store at the URL displayed (typically `https://yourstore.myshopify.com?preview_theme_id=XXXXX`)
+Access your development store at the URL displayed (typically `https://yourstore.myshopify.com/?preview_theme_id=XXXXX`)
 
 ### Deploy Changes
 
@@ -114,6 +114,10 @@ shopify theme package
 Run the verification script to ensure everything is set up correctly:
 
 ```bash
+# Make script executable (if needed)
+chmod +x verify-theme.sh
+
+# Run verification
 ./verify-theme.sh
 ```
 
@@ -376,7 +380,7 @@ shopify theme pull
 
 ### Theme-Specific Issues
 - Email: italoil.store@gmail.com
-- GitHub Issues: [italoil/italoil/issues](https://github.com/italoil/italoil/issues)
+- GitHub Issues: [github.com/italoil/italoil/issues](https://github.com/italoil/italoil/issues)
 
 ### Shopify CLI Issues
 - [Shopify CLI Documentation](https://shopify.dev/docs/themes/tools/cli)
