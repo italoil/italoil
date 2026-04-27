@@ -1,0 +1,40 @@
+name: "Copilot Setup Steps"
+
+on:
+    workflow_dispatch:
+    push:
+        paths:
+            - .github/workflows/copilot-setup-steps.yml
+    pull_request:
+        paths:
+            - .github/workflows/copilot-setup-steps.yml
+
+jobs:
+    copilot-setup-steps:
+        runs-on: ubuntu-latest
+
+        permissions:
+            contents: read
+
+        steps:
+            - name: Checkout code
+              uses: actions/checkout@v4
+
+            - name: Configure AdWhiz MCP server
+              env:
+                  ADWHIZ_API_KEY: ${{ secrets.ADWHIZ_API_KEY }}
+              run: |
+                  mkdir -p "$HOME/.copilot"
+                  cat > "$HOME/.copilot/mcp.json" <<'EOF'
+                  {
+                    "mcpServers": {
+                      "adwhiz": {
+                        "transport": "http",
+                        "url": "https://mcp.adwhiz.ai/mcp",
+                        "headers": {
+                          "Authorization": "Bearer ${ADWHIZ_API_KEY}"
+                        }
+                      }
+                    }
+                  }
+                  EOF
