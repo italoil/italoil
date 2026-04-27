@@ -1,0 +1,22 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//ITALOIL//Market Schedule//EN
+CALSCALE:GREGORIAN
+X-WR-CALNAME:Logan Square FM
+X-WR-TIMEZONE:America/Chicago
+BEGIN:VEVENT
+DTSTART;TZID=America/Chicago:20260412T060000
+DTEND;TZID=America/Chicago:20260412T140000
+SUMMARY:Logan Square Opening Day
+LOCATION:Logan Square, Chicago, IL
+DESCRIPTION:One-off opening day event; not part of the weekly series
+END:VEVENT
+BEGIN:VEVENT
+DTSTART;TZID=America/Chicago:20260510T063000
+DTEND;TZID=America/Chicago:20260510T150000
+RRULE:FREQ=WEEKLY;BYDAY=SU;UNTIL=20261101T065959Z
+SUMMARY:Logan Square FM
+LOCATION:Logan Square, Chicago, IL
+DESCRIPTION:Weekly farmers market vendor slot (season starts May 10)
+END:VEVENT
+END:VCALENDAR

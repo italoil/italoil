@@ -4,6 +4,7 @@
   "description": "ITALOIL Shopify 2.0 Theme - Premium Italian Extra Virgin Olive Oil",
   "private": true,
   "scripts": {
+    "market-overlaps": "node tools/market-overlap/market-overlap.js",
     "dev": "shopify theme dev",
     "dev:open": "shopify theme dev --open",
     "push": "shopify theme push",
