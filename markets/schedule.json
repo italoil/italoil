@@ -1,0 +1,103 @@
+{
+  "_comment": "2026 farmers market schedule. All times are local Chicago time (America/Chicago).",
+  "markets": [
+    {
+      "id": "evanston-fm",
+      "name": "Evanston Farmers Market",
+      "day_of_week": "Saturday",
+      "season_start": "2026-05-02",
+      "setup_start": "06:30",
+      "setup_end": "14:00",
+      "notes": "Saturday morning market"
+    },
+    {
+      "id": "wicker-park-fm",
+      "name": "Wicker Park Farmers Market",
+      "day_of_week": "Sunday",
+      "season_start": "2026-05-03",
+      "setup_start": "06:30",
+      "setup_end": "15:00",
+      "notes": "Sunday market"
+    },
+    {
+      "id": "logan-square-fm",
+      "name": "Logan Square Farmers Market",
+      "day_of_week": "Sunday",
+      "season_start": "2026-05-10",
+      "setup_start": "06:00",
+      "setup_end": "14:00",
+      "notes": "First day is May 10, 2026. Sunday market."
+    },
+    {
+      "id": "andersonville-fm",
+      "name": "Andersonville Farmers Market",
+      "day_of_week": "Wednesday",
+      "season_start": "2026-05-13",
+      "setup_start": "13:30",
+      "setup_end": "20:00",
+      "notes": "Wednesday evening market"
+    },
+    {
+      "id": "naperville-fm",
+      "name": "Naperville Farmers Market",
+      "day_of_week": "Saturday",
+      "season_start": "2026-06-06",
+      "setup_start": "05:30",
+      "setup_end": "14:00",
+      "notes": "Saturday morning market"
+    },
+    {
+      "id": "winnetka-fm",
+      "name": "Winnetka Farmers Market",
+      "day_of_week": "Saturday",
+      "season_start": "2026-06-06",
+      "setup_start": "06:00",
+      "setup_end": "13:30",
+      "notes": "Saturday morning market"
+    },
+    {
+      "id": "elmhurst-fm",
+      "name": "Elmhurst Farmers Market",
+      "day_of_week": "Wednesday",
+      "season_start": "2026-06-03",
+      "setup_start": "05:30",
+      "setup_end": "14:00",
+      "notes": "Wednesday market"
+    },
+    {
+      "id": "highwood-gourmet-fm",
+      "name": "Celebrate Highwood Evening Gourmet Market",
+      "day_of_week": "Wednesday",
+      "season_start": "2026-06-03",
+      "setup_start": "15:30",
+      "setup_end": "22:00",
+      "notes": "Wednesday evening market"
+    }
+  ],
+  "overlaps": [
+    {
+      "date": "2026-05-10",
+      "markets": ["wicker-park-fm", "logan-square-fm"],
+      "overlap_window": "06:30–14:00",
+      "note": "First Sunday overlap: Wicker Park (06:30–15:00) and Logan Square (06:00–14:00) conflict starting May 10, 2026."
+    },
+    {
+      "date": "2026-06-06",
+      "markets": ["evanston-fm", "naperville-fm", "winnetka-fm"],
+      "overlap_window": "06:30–13:30",
+      "note": "First Saturday overlap: Evanston, Naperville, and Winnetka all conflict starting June 6, 2026."
+    },
+    {
+      "date": "2026-06-03",
+      "markets": ["elmhurst-fm", "andersonville-fm"],
+      "overlap_window": "13:30–14:00",
+      "note": "First Wednesday overlap: Elmhurst (05:30–14:00) and Andersonville (13:30–20:00) share 13:30–14:00 starting June 3, 2026."
+    },
+    {
+      "date": "2026-06-03",
+      "markets": ["highwood-gourmet-fm", "andersonville-fm"],
+      "overlap_window": "15:30–20:00",
+      "note": "Highwood Evening Gourmet (15:30–22:00) and Andersonville (13:30–20:00) share 15:30–20:00 starting June 3, 2026."
+    }
+  ]
+}
