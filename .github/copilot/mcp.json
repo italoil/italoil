@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "adwhiz": {
+      "transport": "http",
+      "url": "https://mcp.adwhiz.ai/mcp",
+      "headers": {
+        "Authorization": "Bearer ${ADWHIZ_API_KEY}"
+      }
+    }
+  }
+}
