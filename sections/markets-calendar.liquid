@@ -1,0 +1,518 @@
+<section class="section markets-calendar-section">
+  <div class="container">
+    {%- if section.settings.title != blank -%}
+      <h1 style="text-align: center; margin-bottom: 1rem;">{{ section.settings.title }}</h1>
+    {%- endif -%}
+    {%- if section.settings.subtitle != blank -%}
+      <p style="text-align: center; font-size: 1.8rem; color: var(--color-text-light, #666); margin-bottom: 4rem;">
+        {{ section.settings.subtitle }}
+      </p>
+    {%- endif -%}
+
+    <div id="markets-upcoming" class="markets-upcoming">
+      <p class="markets-loading" style="text-align:center; padding: 3rem 0; color: var(--color-text-light, #888);">
+        Loading upcoming markets…
+      </p>
+    </div>
+
+    <div id="markets-all-seasons" class="markets-all-seasons" style="display:none; margin-top: 5rem;">
+      <h2 style="text-align: center; margin-bottom: 3rem;">{{ section.settings.all_markets_heading | default: '2026 Market Season Overview' }}</h2>
+      <div id="markets-season-list" class="markets-season-list"></div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .markets-calendar-section {
+    background: var(--color-background, #faf9f6);
+    padding: 6rem 0;
+  }
+
+  .markets-upcoming-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(30rem, 1fr));
+    gap: 2.4rem;
+    margin-top: 2rem;
+  }
+
+  .market-card {
+    background: #fff;
+    border: 1px solid var(--color-border, #e0ddd5);
+    border-radius: 8px;
+    padding: 2.4rem;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    transition: box-shadow 0.2s ease;
+  }
+
+  .market-card:hover {
+    box-shadow: 0 4px 16px rgba(0,0,0,0.08);
+  }
+
+  .market-card__badge {
+    display: inline-block;
+    background: var(--color-accent, #c8a96e);
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 600;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    padding: 0.3rem 1rem;
+    border-radius: 4px;
+    width: fit-content;
+  }
+
+  .market-card__badge--next {
+    background: var(--color-primary, #2c2c2c);
+  }
+
+  .market-card__name {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin: 0;
+    color: var(--color-primary, #2c2c2c);
+  }
+
+  .market-card__datetime {
+    font-size: 1.5rem;
+    color: var(--color-text, #444);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+  }
+
+  .market-card__location {
+    font-size: 1.4rem;
+    color: var(--color-text-light, #666);
+    display: flex;
+    align-items: flex-start;
+    gap: 0.6rem;
+  }
+
+  .market-card__description {
+    font-size: 1.3rem;
+    color: var(--color-text-light, #888);
+    margin: 0;
+    line-height: 1.5;
+  }
+
+  .markets-section-heading {
+    font-size: 2.2rem;
+    font-weight: 600;
+    margin-bottom: 2rem;
+    color: var(--color-primary, #2c2c2c);
+    border-bottom: 2px solid var(--color-accent, #c8a96e);
+    padding-bottom: 0.8rem;
+  }
+
+  .markets-season-list .market-season-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1.4rem 0;
+    border-bottom: 1px solid var(--color-border, #e0ddd5);
+    gap: 1.6rem;
+    flex-wrap: wrap;
+  }
+
+  .market-season-row__name {
+    font-weight: 600;
+    font-size: 1.5rem;
+    flex: 0 0 22rem;
+  }
+
+  .market-season-row__dates {
+    font-size: 1.4rem;
+    color: var(--color-text-light, #666);
+    flex: 1 1 18rem;
+  }
+
+  .market-season-row__location {
+    font-size: 1.3rem;
+    color: var(--color-text-light, #888);
+    flex: 1 1 22rem;
+    text-align: right;
+  }
+
+  @media (max-width: 768px) {
+    .markets-upcoming-grid {
+      grid-template-columns: 1fr;
+    }
+    .market-season-row__location {
+      text-align: left;
+    }
+  }
+</style>
+
+<script>
+(function() {
+  var ICS_URL = {{ 'markets-calendar.ics' | asset_url | json }};
+  var SHOW_UPCOMING = {{ section.settings.upcoming_count | default: 5 }};
+
+  /* ---- ICS parser ---- */
+  function unfold(text) {
+    return text.replace(/\r\n[ \t]/g, '').replace(/\r\n/g, '\n').replace(/\r/g, '\n');
+  }
+
+  function parseICS(text) {
+    text = unfold(text);
+    var events = [];
+    var lines = text.split('\n');
+    var inEvent = false;
+    var current = null;
+    lines.forEach(function(line) {
+      if (line === 'BEGIN:VEVENT') { inEvent = true; current = {}; return; }
+      if (line === 'END:VEVENT') { if (current) events.push(current); inEvent = false; current = null; return; }
+      if (!inEvent) return;
+      var sep = line.indexOf(':');
+      if (sep < 0) return;
+      var key = line.substring(0, sep);
+      var val = line.substring(sep + 1).trim();
+      /* Handle DTSTART;TZID=... and DTEND;TZID=... */
+      var baseKey = key.split(';')[0].toUpperCase();
+      var tzidMatch = key.match(/TZID=([^;:]+)/i);
+      var tzid = tzidMatch ? tzidMatch[1] : null;
+      if (baseKey === 'DTSTART') { current.dtstart = val; current.dtstart_tzid = tzid; }
+      else if (baseKey === 'DTEND')   { current.dtend   = val; current.dtend_tzid = tzid; }
+      else if (baseKey === 'RRULE')   { current.rrule   = parseRRULE(val); }
+      else if (baseKey === 'SUMMARY') { current.summary  = val; }
+      else if (baseKey === 'LOCATION'){ current.location = val.replace(/\\,/g, ',').replace(/\\n/g, '\n'); }
+      else if (baseKey === 'DESCRIPTION') { current.description = val.replace(/\\,/g, ',').replace(/\\n/g, '\n'); }
+      else if (baseKey === 'UID')     { current.uid = val; }
+    });
+    return events;
+  }
+
+  function parseRRULE(str) {
+    var rule = {};
+    str.split(';').forEach(function(part) {
+      var kv = part.split('=');
+      rule[kv[0].toUpperCase()] = kv[1];
+    });
+    return rule;
+  }
+
+  /* Parse ICS datetime string (YYYYMMDDTHHmmss) into a UTC Date.
+     For simplicity we treat America/Chicago as CDT (UTC-5) during summer
+     and CST (UTC-6) during winter. */
+  function icsToDate(str, tzid) {
+    if (!str) return null;
+    var m = str.match(/^(\d{4})(\d{2})(\d{2})T(\d{2})(\d{2})(\d{2})(Z?)$/);
+    if (!m) {
+      /* date-only */
+      var d = str.match(/^(\d{4})(\d{2})(\d{2})$/);
+      if (d) return new Date(Date.UTC(+d[1], +d[2]-1, +d[3]));
+      return null;
+    }
+    var isUTC = m[7] === 'Z';
+    if (isUTC) {
+      return new Date(Date.UTC(+m[1], +m[2]-1, +m[3], +m[4], +m[5], +m[6]));
+    }
+    /* For America/Chicago: CDT = UTC-5 (Mar 2nd Sun – Nov 1st Sun), CST = UTC-6 */
+    var offsetMin = chicagoOffset(+m[1], +m[2]-1, +m[3]) * 60;
+    return new Date(Date.UTC(+m[1], +m[2]-1, +m[3], +m[4], +m[5], +m[6]) - offsetMin * 60 * 1000);
+  }
+
+  function chicagoOffset(year, month0, day) {
+    /* DST: second Sunday in March → first Sunday in November */
+    var dstStart = nthWeekdayOfMonth(year, 2, 0, 2); /* March, 0=Sun, 2nd */
+    var dstEnd   = nthWeekdayOfMonth(year, 10, 0, 1); /* November, 0=Sun, 1st */
+    var d = new Date(Date.UTC(year, month0, day));
+    if (d >= dstStart && d < dstEnd) return -5; /* CDT */
+    return -6; /* CST */
+  }
+
+  function nthWeekdayOfMonth(year, month0, wday, n) {
+    var d = new Date(Date.UTC(year, month0, 1));
+    var count = 0;
+    while (true) {
+      if (d.getUTCDay() === wday) { count++; if (count === n) return d; }
+      d.setUTCDate(d.getUTCDate() + 1);
+    }
+  }
+
+  var WEEKDAY_INDEX = {SU:0,MO:1,TU:2,WE:3,TH:4,FR:5,SA:6};
+
+  function nthWeekdayOfMonth(year, month0, wday, n) {
+    var d = new Date(Date.UTC(year, month0, 1));
+    var count = 0;
+    var safety = 0;
+    while (safety < 40) {
+      if (d.getUTCDay() === wday) { count++; if (count === n) return d; }
+      d.setUTCDate(d.getUTCDate() + 1);
+      safety++;
+    }
+    return d;
+  }
+
+  /* Expand a recurring event into individual occurrences between [from, to] */
+  function expandOccurrences(event, from, to) {
+    var start = icsToDate(event.dtstart, event.dtstart_tzid);
+    var end   = icsToDate(event.dtend,   event.dtend_tzid);
+    if (!start) return [];
+    var duration = end ? (end - start) : 0;
+
+    if (!event.rrule) {
+      /* Single occurrence */
+      if (start >= from && start <= to) {
+        return [{ start: start, end: new Date(start.getTime() + duration), event: event }];
+      }
+      return [];
+    }
+
+    var rule = event.rrule;
+    var freq  = (rule.FREQ || '').toUpperCase();
+    var until = rule.UNTIL ? icsToDate(rule.UNTIL, null) : to;
+    var count = rule.COUNT ? parseInt(rule.COUNT, 10) : Infinity;
+    var interval = rule.INTERVAL ? parseInt(rule.INTERVAL, 10) : 1;
+    var byday = rule.BYDAY ? rule.BYDAY.split(',') : null;
+
+    if (freq !== 'WEEKLY' && freq !== 'DAILY') {
+      /* For this calendar, all rules are WEEKLY – fall back to single occurrence for others */
+      if (start >= from && start <= to) {
+        return [{ start: start, end: new Date(start.getTime() + duration), event: event }];
+      }
+      return [];
+    }
+
+    var occurrences = [];
+    var cursor = new Date(start);
+    var n = 0;
+
+    if (freq === 'WEEKLY' && byday && byday.length > 0) {
+      /* Walk week by week, emit matching weekdays */
+      /* Find the Monday of the week containing dtstart */
+      var weekStart = new Date(cursor);
+      var dow = weekStart.getUTCDay();
+      weekStart.setUTCDate(weekStart.getUTCDate() - dow); /* rewind to Sunday */
+
+      var effectiveUntil = until < to ? until : to;
+
+      while (weekStart <= effectiveUntil && n < count) {
+        byday.forEach(function(bd) {
+          var targetDow = WEEKDAY_INDEX[bd.replace(/[^A-Z]/g,'').toUpperCase()];
+          if (targetDow === undefined) return;
+          var occ = new Date(weekStart);
+          occ.setUTCDate(weekStart.getUTCDate() + targetDow);
+          /* Preserve the time from dtstart */
+          occ.setUTCHours(start.getUTCHours(), start.getUTCMinutes(), start.getUTCSeconds(), 0);
+          if (occ < start) return; /* before first occurrence */
+          if (occ > effectiveUntil) return;
+          if (occ >= from && occ <= to && n < count) {
+            occurrences.push({ start: occ, end: new Date(occ.getTime() + duration), event: event });
+            n++;
+          } else if (occ >= start) {
+            n++; /* still consume count even if outside [from,to] */
+          }
+        });
+        weekStart.setUTCDate(weekStart.getUTCDate() + 7 * interval);
+      }
+    } else {
+      /* Simple daily/weekly without BYDAY */
+      var step = freq === 'DAILY' ? 86400000 * interval : 7 * 86400000 * interval;
+      var effectiveUntil2 = until < to ? until : to;
+      while (cursor <= effectiveUntil2 && n < count) {
+        if (cursor >= from) {
+          occurrences.push({ start: new Date(cursor), end: new Date(cursor.getTime() + duration), event: event });
+        }
+        cursor = new Date(cursor.getTime() + step);
+        n++;
+      }
+    }
+
+    return occurrences;
+  }
+
+  /* Format a UTC Date into a human-readable string in America/Chicago */
+  function formatDateTime(date) {
+    try {
+      return date.toLocaleString('en-US', {
+        timeZone: 'America/Chicago',
+        weekday: 'long',
+        month:   'long',
+        day:     'numeric',
+        year:    'numeric',
+        hour:    'numeric',
+        minute:  '2-digit',
+        hour12:  true
+      });
+    } catch(e) {
+      return date.toDateString();
+    }
+  }
+
+  function formatTime(date) {
+    try {
+      return date.toLocaleString('en-US', {
+        timeZone: 'America/Chicago',
+        hour:    'numeric',
+        minute:  '2-digit',
+        hour12:  true
+      });
+    } catch(e) {
+      return '';
+    }
+  }
+
+  function formatDateShort(date) {
+    try {
+      return date.toLocaleString('en-US', {
+        timeZone: 'America/Chicago',
+        month: 'short',
+        day:   'numeric',
+        year:  'numeric'
+      });
+    } catch(e) {
+      return date.toDateString();
+    }
+  }
+
+  /* Build the season overview (first / last occurrence per event UID) */
+  function buildSeasonOverview(events, from, to) {
+    var map = {};
+    events.forEach(function(evt) {
+      var start = icsToDate(evt.dtstart, evt.dtstart_tzid);
+      var rule  = evt.rrule;
+      var until = rule && rule.UNTIL ? icsToDate(rule.UNTIL, null) : start;
+      if (!map[evt.uid]) {
+        map[evt.uid] = {
+          name:     evt.summary,
+          location: evt.location || '',
+          first:    start,
+          last:     until
+        };
+      }
+    });
+    return Object.values(map).sort(function(a,b){ return a.first - b.first; });
+  }
+
+  /* ---- Render ---- */
+  function render(events) {
+    var now = new Date();
+    var futureLimit = new Date(now.getFullYear() + 1, now.getMonth(), now.getDate());
+
+    /* Gather all upcoming occurrences */
+    var allOccurrences = [];
+    events.forEach(function(evt) {
+      var occs = expandOccurrences(evt, now, futureLimit);
+      allOccurrences = allOccurrences.concat(occs);
+    });
+
+    /* Sort by start date */
+    allOccurrences.sort(function(a,b){ return a.start - b.start; });
+
+    var upcoming = allOccurrences.slice(0, SHOW_UPCOMING);
+
+    var container = document.getElementById('markets-upcoming');
+    if (!container) return;
+
+    if (upcoming.length === 0) {
+      container.innerHTML = '<p style="text-align:center;padding:3rem 0;color:#888;">No upcoming market events found.</p>';
+      return;
+    }
+
+    var html = '<h2 class="markets-section-heading">Next ' + upcoming.length + ' Upcoming Markets</h2>';
+    html += '<div class="markets-upcoming-grid">';
+    upcoming.forEach(function(occ, idx) {
+      var badge = idx === 0
+        ? '<span class="market-card__badge market-card__badge--next">Next Up</span>'
+        : '<span class="market-card__badge">Coming Up</span>';
+      var dateStr = formatDateTime(occ.start);
+      var endTimeStr = formatTime(occ.end);
+      var location = occ.event.location || '';
+      var desc = occ.event.description || '';
+      html += '<div class="market-card">'
+        + badge
+        + '<h3 class="market-card__name">' + escHtml(occ.event.summary) + '</h3>'
+        + '<p class="market-card__datetime">📅 ' + escHtml(dateStr) + ' – ' + escHtml(endTimeStr) + '</p>'
+        + (location ? '<p class="market-card__location">📍 ' + escHtml(location) + '</p>' : '')
+        + (desc ? '<p class="market-card__description">' + escHtml(desc) + '</p>' : '')
+        + '</div>';
+    });
+    html += '</div>';
+    container.innerHTML = html;
+
+    /* Season overview */
+    var seasonData = buildSeasonOverview(events, now, futureLimit);
+    var seasonContainer = document.getElementById('markets-season-list');
+    var seasonSection   = document.getElementById('markets-all-seasons');
+    if (seasonContainer && seasonData.length > 0) {
+      var shtml = '';
+      seasonData.forEach(function(row) {
+        shtml += '<div class="market-season-row">'
+          + '<span class="market-season-row__name">' + escHtml(row.name) + '</span>'
+          + '<span class="market-season-row__dates">🗓 ' + formatDateShort(row.first) + ' → ' + formatDateShort(row.last) + '</span>'
+          + '<span class="market-season-row__location">📍 ' + escHtml(row.location) + '</span>'
+          + '</div>';
+      });
+      seasonContainer.innerHTML = shtml;
+      seasonSection.style.display = '';
+    }
+  }
+
+  function escHtml(str) {
+    return (str || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  /* ---- Fetch & parse ---- */
+  fetch(ICS_URL)
+    .then(function(res) {
+      if (!res.ok) throw new Error('Failed to load calendar: ' + res.status);
+      return res.text();
+    })
+    .then(function(text) {
+      var events = parseICS(text);
+      render(events);
+    })
+    .catch(function(err) {
+      var container = document.getElementById('markets-upcoming');
+      if (container) {
+        container.innerHTML = '<p style="text-align:center;padding:3rem 0;color:#c00;">Could not load market calendar. Please try again later.</p>';
+      }
+      console.error('Market calendar error:', err);
+    });
+})();
+</script>
+
+{% schema %}
+{
+  "name": "Markets Calendar",
+  "tag": "section",
+  "class": "markets-calendar-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Upcoming Markets"
+    },
+    {
+      "type": "textarea",
+      "id": "subtitle",
+      "label": "Subtitle",
+      "default": "Find ITALOIL at these local farmers & specialty markets near you."
+    },
+    {
+      "type": "range",
+      "id": "upcoming_count",
+      "min": 3,
+      "max": 20,
+      "step": 1,
+      "label": "Number of upcoming events to show",
+      "default": 5
+    },
+    {
+      "type": "text",
+      "id": "all_markets_heading",
+      "label": "Season overview heading",
+      "default": "2026 Market Season Overview"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Markets Calendar"
+    }
+  ]
+}
+{% endschema %}
