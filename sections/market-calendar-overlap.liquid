@@ -4,7 +4,7 @@
     <div class="mco-section__header">
       <h1 class="mco-section__title">{{ section.settings.title | default: 'Market Schedule Conflicts' }}</h1>
       <p class="mco-section__subtitle">
-        {{ section.settings.description | default: 'Scheduling conflicts between your farmers-market calendar events. All times in America/Chicago (CDT, UTC−5).' }}
+        {{ section.settings.description | default: 'Scheduling conflicts between your farmers-market calendar events. All times in America/Chicago timezone (CDT during summer, CST in winter).' }}
       </p>
     </div>
 
@@ -20,7 +20,7 @@
         <li><strong>Park Ridge FM</strong> has a schedule override on 2026-06-27 whose exact new hours were not provided; it is shown here with its regular 05:30&ndash;14:00 window.</li>
         <li><strong>Logan Square FM</strong> excludes its regular 2026-05-17 recurrence but adds an extra one-off event that day at the same hours (06:30&ndash;15:00).</li>
         <li><strong>Lake Geneva</strong> one-off dates are not included &mdash; exact date/time data was not specified in the uploaded calendar.</li>
-        <li>Ravinia and Hinsdale one-off times are converted from UTC to CDT (UTC&minus;5): 11:00Z&rarr;06:00&nbsp;CDT and 10:30Z&rarr;05:30&nbsp;CDT respectively.</li>
+        <li>Ravinia and Hinsdale one-off times are converted from UTC to America/Chicago local time (CDT, UTC&minus;5 during summer): 11:00Z&rarr;06:00&nbsp;CDT and 10:30Z&rarr;05:30&nbsp;CDT respectively.</li>
       </ul>
     </div>
 
@@ -226,7 +226,7 @@
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Scheduling conflicts between your farmers-market calendar events. All times in America/Chicago (CDT, UTC\u22125)."
+      "default": "Scheduling conflicts between your farmers-market calendar events. All times in America/Chicago timezone (CDT during summer, CST in winter)."
     }
   ],
   "presets": [
