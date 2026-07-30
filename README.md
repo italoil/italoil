@@ -31,6 +31,8 @@ See [README_THEME.md](./README_THEME.md) for complete theme documentation.
 
 ## Quick Start
 
+**✅ This theme is ready for Shopify CLI!** See [SHOPIFY_CLI_INTEGRATION.md](./SHOPIFY_CLI_INTEGRATION.md) for complete setup instructions.
+
 ### Option A: Using Shopify CLI (Recommended for Development)
 
 ```bash
@@ -41,11 +43,14 @@ npm install -g @shopify/cli @shopify/theme
 git clone https://github.com/italoil/italoil.git
 cd italoil
 
+# Verify theme structure (optional but recommended)
+./verify-theme.sh
+
 # Start development server
 shopify theme dev
 ```
 
-See [SHOPIFY_CLI_GUIDE.md](./SHOPIFY_CLI_GUIDE.md) for complete Shopify CLI documentation.
+See [SHOPIFY_CLI_INTEGRATION.md](./SHOPIFY_CLI_INTEGRATION.md) for the complete integration guide or [SHOPIFY_CLI_GUIDE.md](./SHOPIFY_CLI_GUIDE.md) for detailed CLI documentation.
 
 **Having issues?** See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for common error solutions.
 
