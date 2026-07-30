@@ -1,0 +1,16 @@
+{
+  "sections": {
+    "markets-calendar": {
+      "type": "markets-calendar",
+      "settings": {
+        "title": "Upcoming Markets",
+        "subtitle": "Find ITALOIL at these local farmers & specialty markets. Plan your visit and stock up on fresh-pressed extra virgin olive oil.",
+        "upcoming_count": 5,
+        "all_markets_heading": "2026 Market Season Overview"
+      }
+    }
+  },
+  "order": [
+    "markets-calendar"
+  ]
+}
