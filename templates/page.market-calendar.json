@@ -1,0 +1,14 @@
+{
+  "sections": {
+    "main": {
+      "type": "market-calendar-overlap",
+      "settings": {
+        "title": "Market Schedule Conflicts",
+        "description": "Scheduling conflicts between your farmers-market calendar events. All times in America/Chicago (CDT, UTC\u22125)."
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

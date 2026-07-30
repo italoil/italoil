@@ -1,0 +1,238 @@
+<div class="mco-section section">
+  <div class="container">
+
+    <div class="mco-section__header">
+      <h1 class="mco-section__title">{{ section.settings.title | default: 'Market Schedule Conflicts' }}</h1>
+      <p class="mco-section__subtitle">
+        {{ section.settings.description | default: 'Scheduling conflicts between your farmers-market calendar events. All times in America/Chicago timezone (CDT during summer, CST in winter).' }}
+      </p>
+    </div>
+
+    <div id="market-overlap-results" class="mco-results">
+      <p class="mco-loading">Calculating schedule conflicts&hellip;</p>
+    </div>
+
+    <div class="mco-notes">
+      <h3>Data notes</h3>
+      <ul>
+        <li><strong>Wicker Park FM</strong> has additional excluded dates (EXDATEs) in the source .ics file that are not fully enumerated &mdash; actual conflicts involving this market may be fewer than shown.</li>
+        <li><strong>Andersonville FM</strong> and <strong>Naperville FM</strong> also carry EXDATEs not fully specified in the calendar summary.</li>
+        <li><strong>Park Ridge FM</strong> has a schedule override on 2026-06-27 whose exact new hours were not provided; it is shown here with its regular 05:30&ndash;14:00 window.</li>
+        <li><strong>Logan Square FM</strong> excludes its regular 2026-05-17 recurrence but adds an extra one-off event that day at the same hours (06:30&ndash;15:00).</li>
+        <li><strong>Lake Geneva</strong> one-off dates are not included &mdash; exact date/time data was not specified in the uploaded calendar.</li>
+        <li>Ravinia and Hinsdale one-off times are converted from UTC to America/Chicago local time (CDT, UTC&minus;5 during summer): 11:00Z&rarr;06:00&nbsp;CDT and 10:30Z&rarr;05:30&nbsp;CDT respectively.</li>
+      </ul>
+    </div>
+
+  </div>
+</div>
+
+<style>
+  /* ── layout ────────────────────────────────────────────────────── */
+  .mco-section {
+    padding: 5rem 0 6rem;
+  }
+
+  .mco-section__header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .mco-section__title {
+    font-size: clamp(2.8rem, 4vw, 4.4rem);
+  }
+
+  .mco-section__subtitle {
+    font-size: 1.6rem;
+    color: #666;
+    max-width: 68ch;
+    margin: 0.8rem auto 0;
+  }
+
+  /* ── results container ─────────────────────────────────────────── */
+  .mco-results {
+    max-width: 84rem;
+    margin: 0 auto;
+  }
+
+  .mco-loading {
+    text-align: center;
+    color: #888;
+    font-size: 1.6rem;
+  }
+
+  .no-conflicts {
+    text-align: center;
+    color: #4caf50;
+    font-size: 1.8rem;
+    padding: 3rem 0;
+  }
+
+  /* ── summary banner ────────────────────────────────────────────── */
+  .mco-banner {
+    display: flex;
+    align-items: flex-start;
+    gap: 1.6rem;
+    background: #fff8e1;
+    border: 2px solid #ffb300;
+    border-radius: 8px;
+    padding: 2rem 2.4rem;
+    margin-bottom: 3.2rem;
+  }
+
+  .mco-banner__icon {
+    font-size: 3rem;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+
+  .mco-banner__heading {
+    font-size: 2rem;
+    margin-bottom: 0.6rem;
+    color: #795600;
+  }
+
+  .mco-banner__sub {
+    font-size: 1.5rem;
+    color: #5a4000;
+    margin: 0;
+  }
+
+  /* ── date cards ────────────────────────────────────────────────── */
+  .mco-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.4rem;
+  }
+
+  .mco-date {
+    background: #f8f9fa;
+    border: 1px solid #dee2e6;
+    border-radius: 6px;
+    padding: 1.8rem 2.2rem;
+  }
+
+  .mco-date--first {
+    background: #fff5f5;
+    border-color: #e53935;
+  }
+
+  .mco-date__heading {
+    font-size: 1.8rem;
+    margin-bottom: 1.2rem;
+    color: var(--color-primary, #2c2c2c);
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
+  }
+
+  .mco-badge {
+    display: inline-block;
+    background: #e53935;
+    color: #fff;
+    font-size: 1.1rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    padding: 0.2em 0.6em;
+    border-radius: 4px;
+    vertical-align: middle;
+  }
+
+  /* ── conflict pairs ────────────────────────────────────────────── */
+  .mco-pairs {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.7rem;
+  }
+
+  .mco-pair {
+    font-size: 1.4rem;
+    line-height: 1.5;
+    padding: 0.6rem 1rem;
+    background: rgba(255,255,255,0.7);
+    border-radius: 4px;
+  }
+
+  .mco-pair__name {
+    font-weight: 600;
+    color: var(--color-primary, #2c2c2c);
+  }
+
+  .mco-pair__times {
+    color: #555;
+  }
+
+  .mco-pair__vs {
+    color: #e53935;
+    font-weight: 700;
+    margin: 0 0.2rem;
+  }
+
+  /* ── notes box ─────────────────────────────────────────────────── */
+  .mco-notes {
+    max-width: 84rem;
+    margin: 4rem auto 0;
+    padding: 2rem 2.4rem;
+    background: #f1f3f4;
+    border-radius: 6px;
+    font-size: 1.4rem;
+  }
+
+  .mco-notes h3 {
+    font-size: 1.6rem;
+    margin-bottom: 1rem;
+  }
+
+  .mco-notes ul {
+    padding-left: 2rem;
+    margin: 0;
+  }
+
+  .mco-notes li {
+    margin-bottom: 0.7rem;
+    line-height: 1.5;
+  }
+
+  @media (max-width: 600px) {
+    .mco-banner {
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .mco-pair {
+      font-size: 1.3rem;
+    }
+  }
+</style>
+
+<script src="{{ 'market-calendar.js' | asset_url }}" defer></script>
+
+{% schema %}
+{
+  "name": "Market Calendar Overlap",
+  "tag": "section",
+  "class": "market-calendar-section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Page Title",
+      "default": "Market Schedule Conflicts"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Scheduling conflicts between your farmers-market calendar events. All times in America/Chicago timezone (CDT during summer, CST in winter)."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Market Calendar Overlap"
+    }
+  ]
+}
+{% endschema %}
